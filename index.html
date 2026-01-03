@@ -14,6 +14,7 @@
             --card-bg: rgba(255, 255, 255, 0.03);
         }
 
+
         * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         
         body {
@@ -25,6 +26,7 @@
             overflow-x: hidden;
             line-height: 1.6;
         }
+
 
         /* --- NAVIGATION --- */
         nav {
@@ -41,9 +43,11 @@
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
+
         .mini-logo { display: flex; flex-direction: column; }
         .mini-logo h1 { font-size: 18px; color: var(--brand-blue); margin: 0; letter-spacing: -0.5px; }
         .mini-logo span { font-size: 8px; color: #fff; text-transform: uppercase; letter-spacing: 2px; }
+
 
         .nav-links { display: flex; gap: 15px; }
         .nav-link {
@@ -58,13 +62,70 @@
         .btn-outline { border: 1px solid rgba(255,255,255,0.2); color: #fff; }
         .btn-gold { border: 1px solid var(--dubai-gold); color: var(--dubai-gold); }
 
+
+        /* --- PREMIUM SCROLLING TICKER --- */
+        .ticker-wrapper {
+            background: linear-gradient(135deg, rgba(197, 160, 89, 0.08) 0%, rgba(56, 189, 248, 0.08) 100%);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 130px;
+            margin-left: 5%;
+            margin-right: 5%;
+            overflow: hidden;
+            position: relative;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(197, 160, 89, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        
+        .ticker-content {
+            display: flex;
+            animation: scroll-left 50s linear infinite;
+            gap: 60px;
+            white-space: nowrap;
+        }
+        
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 400;
+        }
+        
+        .ticker-item strong {
+            color: var(--dubai-gold);
+            font-weight: 600;
+            font-size: 13px;
+        }
+        
+        .ticker-dot {
+            width: 4px;
+            height: 4px;
+            background: var(--brand-blue);
+            border-radius: 50%;
+            flex-shrink: 0;
+            box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+        }
+        
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+
         /* --- HERO SECTION --- */
         .hero {
-            padding: 180px 5% 100px;
+            padding: 60px 5% 100px;
             text-align: center;
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
         }
+
 
         .capsule-tag {
             display: inline-block;
@@ -80,6 +141,7 @@
             box-shadow: 0 0 15px var(--gold-glow);
         }
 
+
         .hero h1 {
             font-size: clamp(50px, 10vw, 120px);
             font-weight: 900;
@@ -88,6 +150,7 @@
             line-height: 0.9;
             letter-spacing: -4px;
         }
+
 
         .hero h1 span {
             display: block;
@@ -98,12 +161,14 @@
             opacity: 0.9;
         }
 
+
         .hero p {
             max-width: 700px;
             margin: 30px auto;
             font-size: 18px;
             color: var(--platinum);
         }
+
 
         /* --- STATS BAR --- */
         .stats-bar {
@@ -116,11 +181,13 @@
         .stat-item h4 { color: var(--dubai-gold); font-size: 24px; margin: 0; }
         .stat-item p { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; margin: 5px 0 0; }
 
+
         /* --- SECTION STYLING --- */
         section { padding: 100px 5%; max-width: 1300px; margin: 0 auto; }
         .section-title { text-align: center; margin-bottom: 60px; }
         .section-title h2 { font-size: 40px; margin: 10px 0; }
         .section-title span { color: var(--dubai-gold); text-transform: uppercase; letter-spacing: 3px; font-size: 12px; }
+
 
         /* --- BENTO / PRODUCT GRID --- */
         .grid {
@@ -128,6 +195,7 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
         }
+
 
         .card {
             background: var(--card-bg);
@@ -137,7 +205,10 @@
             transition: 0.4s;
             display: flex;
             flex-direction: column;
+            overflow: hidden;
+            position: relative;
         }
+        
         .card:hover {
             border-color: var(--dubai-gold);
             background: rgba(255, 255, 255, 0.05);
@@ -148,6 +219,7 @@
         .card p { color: var(--platinum); font-size: 14px; margin-bottom: 20px; flex-grow: 1; }
         .card ul { padding-left: 18px; color: var(--platinum); font-size: 13px; }
         .card ul li { margin-bottom: 8px; }
+
 
         /* --- ABOUT CONTENT --- */
         .about-flex {
@@ -166,6 +238,7 @@
         .value-box { border-left: 2px solid var(--dubai-gold); padding-left: 15px; }
         .value-box strong { display: block; color: #fff; font-size: 14px; }
         .value-box span { font-size: 12px; color: var(--platinum); }
+
 
         /* --- INQUIRY PANEL --- */
         .inquiry-panel {
@@ -189,8 +262,30 @@
             padding: 15px;
             color: #fff;
             outline: none;
+            font-size: 14px;
+        }
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
         }
         input:focus { border-bottom-color: var(--brand-blue); }
+        
+        textarea {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 15px;
+            color: #fff;
+            outline: none;
+            font-size: 14px;
+            font-family: inherit;
+            resize: vertical;
+            grid-column: 1 / -1;
+        }
+        textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        textarea:focus { border-color: var(--brand-blue); }
+        
         .btn-action {
             background: var(--brand-blue);
             padding: 18px 60px;
@@ -199,8 +294,37 @@
             font-weight: 800;
             cursor: pointer;
             transition: 0.3s;
+            color: #000;
+            font-size: 14px;
         }
-        .btn-action:hover { background: #fff; transform: scale(1.05); }
+        .btn-action:hover { 
+            background: #fff; 
+            transform: scale(1.05); 
+        }
+        .btn-action:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: scale(1);
+        }
+
+        /* Form Status Messages */
+        .form-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 14px;
+            display: none;
+        }
+        .form-message.success {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid rgba(34, 197, 94, 0.5);
+            color: #22c55e;
+        }
+        .form-message.error {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            color: #ef4444;
+        }
 
         footer {
             text-align: center;
@@ -211,14 +335,19 @@
             letter-spacing: 2px;
         }
 
+
         @media (max-width: 768px) {
             .about-flex, .form-grid { grid-template-columns: 1fr; }
             .hero h1 { font-size: 60px; }
             .stats-bar { gap: 20px; }
+            .ticker-item { font-size: 11px; }
+            .ticker-content { gap: 30px; }
+            .ticker-wrapper { margin-left: 0; margin-right: 0; border-radius: 16px; }
         }
     </style>
 </head>
 <body>
+
 
     <nav>
         <div class="mini-logo">
@@ -232,17 +361,42 @@
         </div>
     </nav>
 
+    <!-- PREMIUM SCROLLING TICKER -->
+    <div class="ticker-wrapper">
+        <div class="ticker-content">
+            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Integrity</strong> Ethical Global Practices</span>
+            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Reliability</strong> 25 Years of Trust</span>
+            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Responsibility</strong> Accountable Operations</span>
+            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Global Reach</strong> Markets Worldwide</span>
+            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Innovation</strong> Driving Excellence</span>
+            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Transparency</strong> Open Collaboration</span>
+            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Efficiency</strong> Optimized Solutions</span>
+            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Sustainability</strong> Environmental Stewardship</span>
+            <!-- Duplicated for continuous scroll -->
+            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Integrity</strong> Ethical Global Practices</span>
+            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Reliability</strong> 25 Years of Trust</span>
+            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Responsibility</strong> Accountable Operations</span>
+            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Global Reach</strong> Markets Worldwide</span>
+            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Innovation</strong> Driving Excellence</span>
+            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Transparency</strong> Open Collaboration</span>
+            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Efficiency</strong> Optimized Solutions</span>
+            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Sustainability</strong> Environmental Stewardship</span>
+        </div>
+    </div>
+
+
     <header class="hero">
         <div class="capsule-tag">Connecting Markets Globally</div>
         <h1>JOAN<span>International</span></h1>
         <p>Connecting Markets, Driving Growth Globally. We trade commodities and products worldwide with efficiency, integrity, and innovation.</p>
         
         <div class="stats-bar">
-            <div class="stat-item"><h4>25 years</h4><p>Experiance</p></div>
+            <div class="stat-item"><h4>25 years</h4><p>Experience</p></div>
             <div class="stat-item"><h4>Global</h4><p>Supply Chain</p></div>
             <div class="stat-item"><h4>Expert</h4><p>Risk Management</p></div>
         </div>
     </header>
+
 
     <section id="about">
         <div class="about-flex">
@@ -266,6 +420,7 @@
             </div>
         </div>
     </section>
+
 
     <section id="segments">
         <div class="section-title">
@@ -297,6 +452,7 @@
         </div>
     </section>
 
+
     <section>
         <div class="inquiry-panel" style="background: linear-gradient(145deg, rgba(2, 4, 10, 1), #0f172a); border-color: rgba(255,255,255,0.1); box-shadow: none;">
             <span>Sustainability</span>
@@ -305,26 +461,119 @@
         </div>
     </section>
 
+
     <section id="contact">
         <div class="inquiry-panel">
             <p style="color: var(--dubai-gold); text-transform: uppercase; letter-spacing: 4px; font-size: 11px; margin-bottom: 10px;">Private Consultation</p>
             <h2>Inquiry Suite</h2>
-            <div class="form-grid">
-                <input type="text" placeholder="Full Name">
-                <input type="text" placeholder="Corporate Email">
-                <input type="text" placeholder="Company">
-                <input type="text" placeholder="Nature of Project (e.g. Energy, Metals)">
-            </div>
-            <button class="btn-action">Begin Consultation</button>
-            <div style="margin-top: 40px; font-size: 13px; color: var(--platinum);">
-                <p>General: info@joantrading.com | Sales: sales@joantrading.com</p>
-            </div>
+            <form id="inquiryForm">
+                <div class="form-grid">
+                    <input type="text" name="full_name" placeholder="Full Name" required>
+                    <input type="email" name="email" placeholder="Corporate Email" required>
+                    <input type="text" name="company" placeholder="Company" required>
+                    <input type="text" name="project_type" placeholder="Nature of Project (e.g. Energy, Metals)" required>
+                    <textarea name="message" placeholder="Project Details (Optional)" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn-action">Begin Consultation</button>
+                <div class="form-message success" id="successMessage">
+                    ✓ Thank you! Your inquiry has been submitted successfully. We'll be in touch shortly.
+                </div>
+                <div class="form-message error" id="errorMessage">
+                    ✗ Something went wrong. Please try again or contact us directly.
+                </div>
+            </form>
         </div>
     </section>
+
 
     <footer>
         ©️ JOAN INTERNATIONAL EXECUTIVE PORTAL | <a href="#" style="color: inherit; text-decoration: none;">PRIVACY POLICY</a>
     </footer>
+
+    <script>
+        // Form handling
+        document.getElementById('inquiryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const successMsg = document.getElementById('successMessage');
+            const errorMsg = document.getElementById('errorMessage');
+            
+            // Hide messages
+            successMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
+            
+            // Validate form
+            const fullName = this.full_name.value.trim();
+            const email = this.email.value.trim();
+            const company = this.company.value.trim();
+            const projectType = this.project_type.value.trim();
+            const message = this.message.value.trim();
+            
+            if (!fullName || !email || !company || !projectType) {
+                errorMsg.textContent = '✗ Please fill in all required fields.';
+                errorMsg.style.display = 'block';
+                return false;
+            }
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                errorMsg.textContent = '✗ Please enter a valid email address.';
+                errorMsg.style.display = 'block';
+                return false;
+            }
+            
+            // Prepare data to send to Formspree
+            const formData = new FormData();
+            formData.append('full_name', fullName);
+            formData.append('email', email);
+            formData.append('company', company);
+            formData.append('project_type', projectType);
+            formData.append('message', message);
+            
+            // Send to Formspree using fetch (no redirect)
+            fetch('https://formspree.io/f/xgovnogq', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Show success message
+                    successMsg.style.display = 'block';
+                    // Reset form
+                    document.getElementById('inquiryForm').reset();
+                    // Auto-hide success message after 5 seconds
+                    setTimeout(() => {
+                        successMsg.style.display = 'none';
+                    }, 5000);
+                } else {
+                    errorMsg.textContent = '✗ Submission failed. Please try again.';
+                    errorMsg.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                errorMsg.textContent = '✗ Network error. Please check your connection and try again.';
+                errorMsg.style.display = 'block';
+            });
+            
+            return false;
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
