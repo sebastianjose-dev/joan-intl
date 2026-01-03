@@ -14,7 +14,6 @@
             --card-bg: rgba(255, 255, 255, 0.03);
         }
 
-
         * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         
         body {
@@ -26,7 +25,6 @@
             overflow-x: hidden;
             line-height: 1.6;
         }
-
 
         /* --- NAVIGATION --- */
         nav {
@@ -43,13 +41,11 @@
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
+        .mini-logo { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; }
+        .mini-logo h1 { font-size: 24px; color: var(--brand-blue); margin: 0; letter-spacing: -0.5px; font-weight: 900; }
+        .mini-logo span { font-size: 6px; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; letter-spacing: 3px; font-weight: 500; }
 
-        .mini-logo { display: flex; flex-direction: column; }
-        .mini-logo h1 { font-size: 18px; color: var(--brand-blue); margin: 0; letter-spacing: -0.5px; }
-        .mini-logo span { font-size: 8px; color: #fff; text-transform: uppercase; letter-spacing: 2px; }
-
-
-        .nav-links { display: flex; gap: 15px; }
+        .nav-links { display: flex; gap: 15px; align-items: center; }
         .nav-link {
             padding: 8px 16px;
             border-radius: 8px;
@@ -58,10 +54,53 @@
             text-decoration: none;
             letter-spacing: 1px;
             transition: 0.3s;
+            cursor: pointer;
+            position: relative;
         }
+        .nav-link:hover { background: rgba(255,255,255,0.05); }
         .btn-outline { border: 1px solid rgba(255,255,255,0.2); color: #fff; }
         .btn-gold { border: 1px solid var(--dubai-gold); color: var(--dubai-gold); }
 
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: rgba(2, 4, 10, 0.95);
+            backdrop-filter: blur(10px);
+            min-width: 200px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            border-radius: 12px;
+            top: 100%;
+            left: 0;
+            z-index: 1001;
+            padding: 10px 0;
+            margin-top: 10px;
+        }
+        .dropdown-content.show { display: block; }
+        .dropdown-content a {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+        .dropdown-content a:hover {
+            color: var(--dubai-gold);
+            background: rgba(197, 160, 89, 0.1);
+        }
+        .dropdown-toggle::after {
+            content: '▼';
+            font-size: 8px;
+            margin-left: 6px;
+        }
 
         /* --- PREMIUM SCROLLING TICKER --- */
         .ticker-wrapper {
@@ -116,6 +155,13 @@
             100% { transform: translateX(-50%); }
         }
 
+        /* --- PAGE SECTIONS --- */
+        .page-section {
+            display: none;
+        }
+        .page-section.active {
+            display: block;
+        }
 
         /* --- HERO SECTION --- */
         .hero {
@@ -125,7 +171,6 @@
             margin: 0 auto;
             position: relative;
         }
-
 
         .capsule-tag {
             display: inline-block;
@@ -141,7 +186,6 @@
             box-shadow: 0 0 15px var(--gold-glow);
         }
 
-
         .hero h1 {
             font-size: clamp(50px, 10vw, 120px);
             font-weight: 900;
@@ -151,16 +195,14 @@
             letter-spacing: -4px;
         }
 
-
         .hero h1 span {
             display: block;
-            font-size: 0.5em;
-            background: linear-gradient(180deg, #ffffff 40%, var(--platinum) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            opacity: 0.9;
+            font-size: 0.35em;
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 3px;
+            font-weight: 400;
+            text-transform: uppercase;
         }
-
 
         .hero p {
             max-width: 700px;
@@ -168,7 +210,6 @@
             font-size: 18px;
             color: var(--platinum);
         }
-
 
         /* --- STATS BAR --- */
         .stats-bar {
@@ -181,21 +222,18 @@
         .stat-item h4 { color: var(--dubai-gold); font-size: 24px; margin: 0; }
         .stat-item p { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; margin: 5px 0 0; }
 
-
         /* --- SECTION STYLING --- */
         section { padding: 100px 5%; max-width: 1300px; margin: 0 auto; }
         .section-title { text-align: center; margin-bottom: 60px; }
         .section-title h2 { font-size: 40px; margin: 10px 0; }
         .section-title span { color: var(--dubai-gold); text-transform: uppercase; letter-spacing: 3px; font-size: 12px; }
 
-
-        /* --- BENTO / PRODUCT GRID --- */
+        /* --- GRID --- */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
         }
-
 
         .card {
             background: var(--card-bg);
@@ -220,8 +258,7 @@
         .card ul { padding-left: 18px; color: var(--platinum); font-size: 13px; }
         .card ul li { margin-bottom: 8px; }
 
-
-        /* --- ABOUT CONTENT --- */
+        /* --- FLEX LAYOUTS --- */
         .about-flex {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -239,6 +276,27 @@
         .value-box strong { display: block; color: #fff; font-size: 14px; }
         .value-box span { font-size: 12px; color: var(--platinum); }
 
+        /* --- TIMELINE --- */
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+        }
+        .timeline-item:last-child { border-bottom: none; }
+        .timeline-year {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--dubai-gold);
+        }
+        .timeline-content h4 { color: var(--brand-blue); margin: 0 0 10px; font-size: 16px; }
+        .timeline-content p { color: var(--platinum); font-size: 14px; margin: 0; }
 
         /* --- INQUIRY PANEL --- */
         .inquiry-panel {
@@ -335,163 +393,678 @@
             letter-spacing: 2px;
         }
 
-
         @media (max-width: 768px) {
-            .about-flex, .form-grid { grid-template-columns: 1fr; }
+            .about-flex, .form-grid, .timeline-item { grid-template-columns: 1fr; }
             .hero h1 { font-size: 60px; }
             .stats-bar { gap: 20px; }
             .ticker-item { font-size: 11px; }
             .ticker-content { gap: 30px; }
             .ticker-wrapper { margin-left: 0; margin-right: 0; border-radius: 16px; }
+            .nav-links { gap: 8px; }
+            .nav-link { padding: 6px 10px; font-size: 9px; }
+            .dropdown-content { min-width: 150px; }
         }
     </style>
 </head>
 <body>
 
-
     <nav>
-        <div class="mini-logo">
+        <div class="mini-logo" onclick="navigateTo('home')">
             <h1>JOAN</h1>
             <span>International</span>
         </div>
         <div class="nav-links">
-            <a href="#about" class="nav-link btn-outline">About</a>
-            <a href="#segments" class="nav-link btn-outline">Solutions</a>
-            <a href="#contact" class="nav-link btn-gold">Inquiry</a>
+            <div class="dropdown">
+                <span class="nav-link btn-outline dropdown-toggle" onclick="toggleDropdown('aboutDropdown')">About</span>
+                <div id="aboutDropdown" class="dropdown-content">
+                    <a onclick="navigateTo('about')">Who We Are</a>
+                    <a onclick="navigateTo('timeline')">25-Year Timeline</a>
+                    <a onclick="navigateTo('leadership')">Leadership</a>
+                </div>
+            </div>
+            
+            <div class="dropdown">
+                <span class="nav-link btn-outline dropdown-toggle" onclick="toggleDropdown('solutionsDropdown')">Solutions</span>
+                <div id="solutionsDropdown" class="dropdown-content">
+                    <a onclick="navigateTo('solutions')">Overview</a>
+                    <a onclick="navigateTo('trading')">Global Trading</a>
+                    <a onclick="navigateTo('supply-chain')">Supply Chain</a>
+                    <a onclick="navigateTo('risk-market')">Risk & Market</a>
+                </div>
+            </div>
+
+            <a class="nav-link btn-outline" onclick="navigateTo('sustainability')">Sustainability</a>
+            <a class="nav-link btn-outline" onclick="navigateTo('insights')">Insights</a>
+            <a class="nav-link btn-outline" onclick="navigateTo('careers')">Careers</a>
+            <a class="nav-link btn-gold" onclick="navigateTo('contact')">Inquiry</a>
         </div>
     </nav>
 
-    <!-- PREMIUM SCROLLING TICKER -->
-    <div class="ticker-wrapper">
-        <div class="ticker-content">
-            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Integrity</strong> Ethical Global Practices</span>
-            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Reliability</strong> 25 Years of Trust</span>
-            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Responsibility</strong> Accountable Operations</span>
-            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Global Reach</strong> Markets Worldwide</span>
-            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Innovation</strong> Driving Excellence</span>
-            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Transparency</strong> Open Collaboration</span>
-            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Efficiency</strong> Optimized Solutions</span>
-            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Sustainability</strong> Environmental Stewardship</span>
-            <!-- Duplicated for continuous scroll -->
-            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Integrity</strong> Ethical Global Practices</span>
-            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Reliability</strong> 25 Years of Trust</span>
-            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Responsibility</strong> Accountable Operations</span>
-            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Global Reach</strong> Markets Worldwide</span>
-            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Innovation</strong> Driving Excellence</span>
-            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Transparency</strong> Open Collaboration</span>
-            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Efficiency</strong> Optimized Solutions</span>
-            <span class="ticker-item"><span class="ticker-dot"></span> <strong>Sustainability</strong> Environmental Stewardship</span>
+    <!-- ===== HOME PAGE ===== -->
+    <div id="home" class="page-section active">
+        <div class="ticker-wrapper">
+            <div class="ticker-content">
+                <span class="ticker-item"><span class="ticker-dot"></span> <strong>Integrity</strong> Ethical Global Practices</span>
+                <span class="ticker-item"><span class="ticker-dot"></span> <strong>Reliability</strong> Fast Growing Future</span>
+                <span class="ticker-item"><span class="ticker-dot"></span> <strong>Responsibility</strong> Accountable Operations</span>
+                <span class="ticker-item"><span class="ticker-dot"></span> <strong>Global Reach</strong> Markets Worldwide</span>
+                <span class="ticker-item"><span class="ticker-dot"></span> <strong>Innovation</strong> Driving Excellence</span>
+                <span class="ticker-item"><span class="ticker-dot"></span> <strong>Transparency</strong> Open Collaboration</span>
+                <span class="ticker-item"><span class="ticker-dot"></span> <strong>Efficiency</strong> Optimized Solutions</span>
+                <span class="ticker-item"><span class="ticker-dot"></span> <strong>Sustainability</strong> Environmental Stewardship</span>
+                <span class="ticker-item"><span class="ticker-dot"></span> <strong>Integrity</strong> Ethical Global Practices</span>
+                <span class="ticker-item"><span class="ticker-dot"></span> <strong>Reliability</strong> 25 Years of Trust</span>
+                <span class="ticker-item"><span class="ticker-dot"></span> <strong>Responsibility</strong> Accountable Operations</span>
+                <span class="ticker-item"><span class="ticker-dot"></span> <strong>Global Reach</strong> Markets Worldwide</span>
+                <span class="ticker-item"><span class="ticker-dot"></span> <strong>Innovation</strong> Driving Excellence</span>
+                <span class="ticker-item"><span class="ticker-dot"></span> <strong>Transparency</strong> Open Collaboration</span>
+                <span class="ticker-item"><span class="ticker-dot"></span> <strong>Efficiency</strong> Optimized Solutions</span>
+                <span class="ticker-item"><span class="ticker-dot"></span> <strong>Sustainability</strong> Environmental Stewardship</span>
+            </div>
         </div>
+
+        <header class="hero">
+            <div class="capsule-tag">Connecting Markets Globally</div>
+            <h1>JOAN<span>International</span></h1>
+            <p>Connecting Markets, Driving Growth Globally. We trade commodities and products worldwide with efficiency, integrity, and innovation.</p>
+            
+            <div class="stats-bar">
+                <div class="stat-item"><h4>Fast Growing</h4><p>Startup</p></div>
+                <div class="stat-item"><h4>Global</h4><p>Vision</p></div>
+                <div class="stat-item"><h4>Expert</h4><p>Risk Management</p></div>
+            </div>
+        </header>
+
+        <section id="about">
+            <div class="about-flex">
+                <div class="about-text">
+                    <span>Who We Are</span>
+                    <h3>A Legacy of Global Reliability</h3>
+                    <p>Joan International Trading Company is a leading global trading firm that sources, markets, and delivers key commodities to customers across multiple industries. We responsibly trade essential materials that support global industry and everyday life.</p>
+                    <div class="values-grid">
+                        <div class="value-box"><strong>Integrity</strong><span>Ethical global practices</span></div>
+                        <div class="value-box"><strong>Responsibility</strong><span>Accountable operations</span></div>
+                        <div class="value-box"><strong>Openness</strong><span>Transparent collaboration</span></div>
+                        <div class="value-box"><strong>Entrepreneurial</strong><span>Driving innovation</span></div>
+                    </div>
+                </div>
+                <div class="card" style="justify-content: center; background: rgba(56, 189, 248, 0.03);">
+                    <h5>Our Mission</h5>
+                    <p>"To reliably connect producers and consumers of commodities worldwide, ensuring supply continuity and competitive value through operational excellence."</p>
+                    <hr style="width: 50px; border: 1px solid var(--dubai-gold); margin: 20px 0;">
+                    <h5>Our Vision</h5>
+                    <p>To be recognized as a trusted global trading partner known for sustainable commercial leadership.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="segments">
+            <div class="section-title">
+                <span>What We Do</span>
+                <h2>Business Segments</h2>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h5>Global Trading</h5>
+                    <h3>Commodities & Marketing</h3>
+                    <p>Facilitating international trade of key materials from major supply regions to high-demand markets.</p>
+                    <ul>
+                        <li>Metals and Minerals</li>
+                        <li>Energy & Industrial Raw Materials</li>
+                        <li>Agricultural Products</li>
+                        <li>Metering Solutions</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h5>Logistics</h5>
+                    <h3>Supply Chain Solutions</h3>
+                    <p>Comprehensive management from sourcing to delivery, optimizing cost and timing for global partners.</p>
+                </div>
+                <div class="card">
+                    <h5>Intelligence</h5>
+                    <h3>Risk & Market Services</h3>
+                    <p>Advanced trading strategies and market intelligence to navigate price fluctuations and demand shifts.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="inquiry-panel" style="background: linear-gradient(145deg, rgba(2, 4, 10, 1), #0f172a); border-color: rgba(255,255,255,0.1); box-shadow: none;">
+                <span>Sustainability</span>
+                <h2>Corporate Responsibility</h2>
+                <p style="max-width: 800px; margin: 20px auto; color: var(--platinum);">We prioritize ethical sourcing and environmental stewardship, aligning with global goals to reduce emissions and promote sustainable commercial practices in every community we serve.</p>
+            </div>
+        </section>
     </div>
 
-
-    <header class="hero">
-        <div class="capsule-tag">Connecting Markets Globally</div>
-        <h1>JOAN<span>International</span></h1>
-        <p>Connecting Markets, Driving Growth Globally. We trade commodities and products worldwide with efficiency, integrity, and innovation.</p>
-        
-        <div class="stats-bar">
-            <div class="stat-item"><h4>25 years</h4><p>Experience</p></div>
-            <div class="stat-item"><h4>Global</h4><p>Supply Chain</p></div>
-            <div class="stat-item"><h4>Expert</h4><p>Risk Management</p></div>
-        </div>
-    </header>
-
-
-    <section id="about">
-        <div class="about-flex">
-            <div class="about-text">
-                <span>Who We Are</span>
-                <h3>A Legacy of Global Reliability</h3>
-                <p>Joan International Trading Company is a leading global trading firm that sources, markets, and delivers key commodities to customers across multiple industries. We responsibly trade essential materials that support global industry and everyday life.</p>
-                <div class="values-grid">
-                    <div class="value-box"><strong>Integrity</strong><span>Ethical global practices</span></div>
-                    <div class="value-box"><strong>Responsibility</strong><span>Accountable operations</span></div>
-                    <div class="value-box"><strong>Openness</strong><span>Transparent collaboration</span></div>
-                    <div class="value-box"><strong>Entrepreneurial</strong><span>Driving innovation</span></div>
+    <!-- ===== ABOUT PAGE ===== -->
+    <div id="about" class="page-section">
+        <section>
+            <div class="section-title">
+                <span>Company</span>
+                <h2>About Joan International</h2>
+            </div>
+            <div class="about-flex">
+                <div class="about-text">
+                    <h3>Innovative Startup Trading Excellence</h3>
+                    <p>Joan International Trading Company is an innovative startup trading firm with proven expertise in sourcing, marketing, and delivering commodities to customers worldwide. Our foundation is built on trust, operational excellence, and a commitment to responsible global trade.</p>
+                    <p style="margin-top: 20px; font-size: 14px; color: var(--platinum);">With strategic partnerships across key markets and deep relationships spanning producers, logistics networks, and end-users, we are uniquely positioned to deliver efficient supply solutions in today's dynamic markets.</p>
+                </div>
+                <div style="display: grid; gap: 20px;">
+                    <div class="card">
+                        <h5>Our Purpose</h5>
+                        <p>To responsibly trade and deliver essential commodities that support global industry and everyday life, creating long-term value for customers, suppliers, partners, communities, and stakeholders through ethical and transparent business practices.</p>
+                    </div>
+                    <div class="card">
+                        <h5>Strategic Markets</h5>
+                        <p><strong style="color: var(--dubai-gold);">Key Markets</strong> — Strategic partnerships and operations across Asia, Middle East, and Europe with rapid expansion plans.</p>
+                    </div>
                 </div>
             </div>
-            <div class="card" style="justify-content: center; background: rgba(56, 189, 248, 0.03);">
-                <h5>Our Mission</h5>
-                <p>"To reliably connect producers and consumers of commodities worldwide, ensuring supply continuity and competitive value through operational excellence."</p>
-                <hr style="width: 50px; border: 1px solid var(--dubai-gold); margin: 20px 0;">
-                <h5>Our Vision</h5>
-                <p>To be recognized as a trusted global trading partner known for sustainable commercial leadership.</p>
-            </div>
-        </div>
-    </section>
 
-
-    <section id="segments">
-        <div class="section-title">
-            <span>What We Do</span>
-            <h2>Business Segments</h2>
-        </div>
-        <div class="grid">
-            <div class="card">
-                <h5>Global Trading</h5>
-                <h3>Commodities & Marketing</h3>
-                <p>Facilitating international trade of key materials from major supply regions to high-demand markets.</p>
-                <ul>
-                    <li>Metals and Minerals</li>
-                    <li>Energy & Industrial Raw Materials</li>
-                    <li>Agricultural Products</li>
-                    <li>Metering Solutions</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h5>Logistics</h5>
-                <h3>Supply Chain Solutions</h3>
-                <p>Comprehensive management from sourcing to delivery, optimizing cost and timing for global partners.</p>
-            </div>
-            <div class="card">
-                <h5>Intelligence</h5>
-                <h3>Risk & Market Services</h3>
-                <p>Advanced trading strategies and market intelligence to navigate price fluctuations and demand shifts.</p>
-            </div>
-        </div>
-    </section>
-
-
-    <section>
-        <div class="inquiry-panel" style="background: linear-gradient(145deg, rgba(2, 4, 10, 1), #0f172a); border-color: rgba(255,255,255,0.1); box-shadow: none;">
-            <span>Sustainability</span>
-            <h2>Corporate Responsibility</h2>
-            <p style="max-width: 800px; margin: 20px auto; color: var(--platinum);">We prioritize ethical sourcing and environmental stewardship, aligning with global goals to reduce emissions and promote sustainable commercial practices in every community we serve.</p>
-        </div>
-    </section>
-
-
-    <section id="contact">
-        <div class="inquiry-panel">
-            <p style="color: var(--dubai-gold); text-transform: uppercase; letter-spacing: 4px; font-size: 11px; margin-bottom: 10px;">Private Consultation</p>
-            <h2>Inquiry Suite</h2>
-            <form id="inquiryForm">
-                <div class="form-grid">
-                    <input type="text" name="full_name" placeholder="Full Name" required>
-                    <input type="email" name="email" placeholder="Corporate Email" required>
-                    <input type="text" name="company" placeholder="Company" required>
-                    <input type="text" name="project_type" placeholder="Nature of Project (e.g. Energy, Metals)" required>
-                    <textarea name="message" placeholder="Project Details (Optional)" rows="4"></textarea>
+            <div style="margin-top: 80px;">
+                <div class="section-title">
+                    <span>Core Values</span>
+                    <h2>What Drives Us</h2>
                 </div>
-                <button type="submit" class="btn-action">Begin Consultation</button>
-                <div class="form-message success" id="successMessage">
-                    ✓ Thank you! Your inquiry has been submitted successfully. We'll be in touch shortly.
+                <div class="grid">
+                    <div class="card">
+                        <h5>Integrity</h5>
+                        <h3>Ethical Excellence</h3>
+                        <p>We uphold the highest ethical standards in all business dealings, ensuring transparency and accountability across every transaction and partnership.</p>
+                    </div>
+                    <div class="card">
+                        <h5>Responsibility</h5>
+                        <h3>Accountable Impact</h3>
+                        <p>We take accountability for our impact on people, markets, and the environment, making decisions that benefit all stakeholders.</p>
+                    </div>
+                    <div class="card">
+                        <h5>Openness</h5>
+                        <h3>Transparent Collaboration</h3>
+                        <p>Transparent communication and collaborative partnerships define how we operate with customers, suppliers, and communities.</p>
+                    </div>
+                    <div class="card">
+                        <h5>Simplicity</h5>
+                        <h3>Efficient Solutions</h3>
+                        <p>We pursue straightforward, efficient solutions that reduce complexity and deliver tangible value to our partners.</p>
+                    </div>
+                    <div class="card">
+                        <h5>Entrepreneurial Spirit</h5>
+                        <h3>Innovation-Driven</h3>
+                        <p>Innovation drives growth and opportunity. We embrace new approaches to meet evolving market demands.</p>
+                    </div>
                 </div>
-                <div class="form-message error" id="errorMessage">
-                    ✗ Something went wrong. Please try again or contact us directly.
-                </div>
-            </form>
-        </div>
-    </section>
+            </div>
+        </section>
+    </div>
 
+    <!-- ===== TIMELINE PAGE ===== -->
+    <div id="timeline" class="page-section">
+        <section>
+            <div class="section-title">
+                <span>Our Journey</span>
+                <h2>25 Years of Growth & Excellence</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2000</div>
+                    <div class="timeline-content">
+                        <h4>Foundation & Vision</h4>
+                        <p>Joan International Trading Company established with a mission to connect global commodity markets with operational excellence and integrity.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2005</div>
+                    <div class="timeline-content">
+                        <h4>Expansion to GCC Markets</h4>
+                        <p>Entered energy and industrial commodity markets across the GCC. Secured long-term offtake contracts with major regional buyers.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2010</div>
+                    <div class="timeline-content">
+                        <h4>Metals & Minerals Division Launch</h4>
+                        <p>Expanded commodity portfolio to include metals and minerals. Opened operations in Africa and strengthened Asia-Pacific presence.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2015</div>
+                    <div class="timeline-content">
+                        <h4>Supply Chain Solutions Platform</h4>
+                        <p>Launched integrated supply chain solutions. Expanded to 20+ countries with advanced logistics and financing capabilities.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2018</div>
+                    <div class="timeline-content">
+                        <h4>Risk & Market Intelligence Unit</h4>
+                        <p>Established advanced trading strategies and market analytics division. Introduced hedging solutions for commodity price risk.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2021</div>
+                    <div class="timeline-content">
+                        <h4>Sustainability Commitment</h4>
+                        <p>Launched ESG and sustainability initiatives. Committed to net-zero emissions roadmap and community development programs.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2025</div>
+                    <div class="timeline-content">
+                        <h4>Global Network & Innovation</h4>
+                        <p>Operating in 30+ countries with 500+ staff worldwide. Pioneering metering solutions and digital supply chain transparency.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===== LEADERSHIP PAGE ===== -->
+    <div id="leadership" class="page-section">
+        <section>
+            <div class="section-title">
+                <span>Leadership</span>
+                <h2>Executive Team</h2>
+            </div>
+            <p style="text-align: center; max-width: 700px; margin: 0 auto 60px; color: var(--platinum);">Our leadership team brings together decades of experience in global commodities trading, supply chain management, and risk mitigation across key markets worldwide.</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h5>Executive Leadership</h5>
+                    <h3>Chief Executive Officer</h3>
+                    <p>30+ years in global commodities trading | Expert in energy markets, structured trade finance, and long-term supply contracts | Former VP Trading at leading commodity house.</p>
+                </div>
+                <div class="card">
+                    <h5>Commercial Division</h5>
+                    <h3>Chief Commercial Officer</h3>
+                    <p>20+ years in international trade | Deep relationships with producers and end-users across Africa, Middle East, and Asia | Structured 50+ major supply agreements.</p>
+                </div>
+                <div class="card">
+                    <h5>Operations</h5>
+                    <h3>Chief Operations Officer</h3>
+                    <p>25 years in logistics and supply chain | Expert in customs, compliance, and cross-border operations | Managed operations across 15+ countries.</p>
+                </div>
+                <div class="card">
+                    <h5>Risk & Analytics</h5>
+                    <h3>Chief Risk Officer</h3>
+                    <p>18 years in commodity risk management | Advanced hedging strategies and portfolio optimization | Ph.D. in Finance, published researcher in commodity markets.</p>
+                </div>
+                <div class="card">
+                    <h5>Finance</h5>
+                    <h3>Chief Financial Officer</h3>
+                    <p>22 years in international trade finance | Expertise in working capital solutions and structured financing | Former investment banker at top-tier institutions.</p>
+                </div>
+                <div class="card">
+                    <h5>Sustainability</h5>
+                    <h3>Head of ESG & Sustainability</h3>
+                    <p>15+ years in environmental and social governance | ESG certifications and sustainability frameworks | Leading company's net-zero emissions roadmap.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===== SOLUTIONS OVERVIEW ===== -->
+    <div id="solutions" class="page-section">
+        <section>
+            <div class="section-title">
+                <span>Our Services</span>
+                <h2>Business Solutions</h2>
+            </div>
+            <div class="grid">
+                <div class="card" onclick="navigateTo('trading')" style="cursor: pointer;">
+                    <h5>Global Trading</h5>
+                    <h3>Commodities & Marketing</h3>
+                    <p>International trade facilitation across metals, energy, and specialized commodities. Strategic market access with rapid expansion plans.</p>
+                    <p style="color: var(--brand-blue); margin-top: 10px; font-size: 12px;">→ Learn More</p>
+                </div>
+                <div class="card" onclick="navigateTo('supply-chain')" style="cursor: pointer;">
+                    <h5>Logistics</h5>
+                    <h3>Supply Chain Solutions</h3>
+                    <p>End-to-end procurement, customs management, freight optimization, and trade finance. Real-time visibility from source to delivery.</p>
+                    <p style="color: var(--brand-blue); margin-top: 10px; font-size: 12px;">→ Learn More</p>
+                </div>
+                <div class="card" onclick="navigateTo('risk-market')" style="cursor: pointer;">
+                    <h5>Intelligence</h5>
+                    <h3>Risk & Market Services</h3>
+                    <p>Advanced trading strategies, market forecasting, hedging solutions, and regulatory advisory. Navigate commodity price volatility with confidence.</p>
+                    <p style="color: var(--brand-blue); margin-top: 10px; font-size: 12px;">→ Learn More</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===== GLOBAL TRADING PAGE ===== -->
+    <div id="trading" class="page-section">
+        <section>
+            <div class="section-title">
+                <span>Core Service</span>
+                <h2>Global Trading & Commodities</h2>
+            </div>
+            <div class="about-flex">
+                <div class="about-text">
+                    <h3>Connecting Producers to Markets</h3>
+                    <p>We facilitate international trade of key commodities — moving products efficiently from major supply regions to where they are needed most. Our global trading network is built for reliability and market responsiveness.</p>
+                    <div class="values-grid" style="margin-top: 40px;">
+                        <div class="value-box"><strong>Direct Access</strong><span>Global network of producers</span></div>
+                        <div class="value-box"><strong>Market Expertise</strong><span>Strategic market positioning</span></div>
+                        <div class="value-box"><strong>Flexible Terms</strong><span>Tailored contract structures</span></div>
+                        <div class="value-box"><strong>Quality Assured</strong><span>Rigorous compliance protocols</span></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h5>Commodities Traded</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>✓ Metals and Minerals</li>
+                        <li>✓ Energy Products</li>
+                        <li>✓ Industrial Raw Materials</li>
+                        <li>✓ Agricultural Products</li>
+                        <li>✓ Lifting Materials</li>
+                        <li>✓ Metering Solutions</li>
+                    </ul>
+                    <hr style="border: 1px solid rgba(197, 160, 89, 0.2); margin: 30px 0;">
+                    <h5>Why Choose Us</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>✓ Strategic Pricing</li>
+                        <li>✓ Logistics Optimization</li>
+                        <li>✓ Competitive Terms</li>
+                        <li>✓ 25 Years of Trust</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===== SUPPLY CHAIN PAGE ===== -->
+    <div id="supply-chain" class="page-section">
+        <section>
+            <div class="section-title">
+                <span>Integrated Service</span>
+                <h2>Supply Chain Solutions</h2>
+            </div>
+            <div class="about-flex" style="flex-direction: row-reverse;">
+                <div class="about-text">
+                    <h3>End-to-End Logistics Excellence</h3>
+                    <p>From sourcing to final delivery, we manage every aspect of your supply chain with precision and efficiency. Our comprehensive approach optimizes cost and timing while ensuring reliability.</p>
+                    <div class="values-grid" style="margin-top: 40px;">
+                        <div class="value-box"><strong>Procurement</strong><span>Strategic sourcing</span></div>
+                        <div class="value-box"><strong>Customs</strong><span>Compliance management</span></div>
+                        <div class="value-box"><strong>Logistics</strong><span>Freight optimization</span></div>
+                        <div class="value-box"><strong>Finance</strong><span>Working capital solutions</span></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h5>Our Services</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>✓ End-to-end Sourcing</li>
+                        <li>✓ Customs & Compliance</li>
+                        <li>✓ Freight Management</li>
+                        <li>✓ Trade Finance</li>
+                        <li>✓ Real-time Tracking</li>
+                        <li>✓ Risk Mitigation</li>
+                    </ul>
+                    <hr style="border: 1px solid rgba(197, 160, 89, 0.2); margin: 30px 0;">
+                    <h5>Benefits</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>✓ Reduced Delivery Time</li>
+                        <li>✓ Lower Total Cost</li>
+                        <li>✓ Supply Continuity</li>
+                        <li>✓ Full Visibility</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===== RISK & MARKET PAGE ===== -->
+    <div id="risk-market" class="page-section">
+        <section>
+            <div class="section-title">
+                <span>Specialist Service</span>
+                <h2>Risk & Market Services</h2>
+            </div>
+            <div class="about-flex">
+                <div class="about-text">
+                    <h3>Navigate Market Volatility with Confidence</h3>
+                    <p>Advanced trading strategies and market intelligence help clients navigate commodity price fluctuations and global demand shifts. Our risk management expertise ensures your supply chain remains resilient.</p>
+                    <div class="values-grid" style="margin-top: 40px;">
+                        <div class="value-box"><strong>Analytics</strong><span>Market forecasting</span></div>
+                        <div class="value-box"><strong>Hedging</strong><span>Price protection</span></div>
+                        <div class="value-box"><strong>Strategy</strong><span>Portfolio optimization</span></div>
+                        <div class="value-box"><strong>Compliance</strong><span>Regulatory advisory</span></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h5>Services Offered</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>✓ Market Forecasting</li>
+                        <li>✓ Price Hedging</li>
+                        <li>✓ Portfolio Analysis</li>
+                        <li>✓ Scenario Planning</li>
+                        <li>✓ Regulatory Compliance</li>
+                        <li>✓ Risk Assessment</li>
+                    </ul>
+                    <hr style="border: 1px solid rgba(197, 160, 89, 0.2); margin: 30px 0;">
+                    <h5>Why This Matters</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>✓ Protect Margins</li>
+                        <li>✓ Reduce Volatility</li>
+                        <li>✓ Strategic Planning</li>
+                        <li>✓ Informed Decisions</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===== SUSTAINABILITY PAGE ===== -->
+    <div id="sustainability" class="page-section">
+        <section>
+            <div class="section-title">
+                <span>Corporate Impact</span>
+                <h2>Sustainability & CSR</h2>
+            </div>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 60px; color: var(--platinum);">At Joan International, sustainability is embedded in how we operate. We prioritize ethical sourcing, environmental stewardship, and community engagement across all our operations.</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h5>Responsible Trade</h5>
+                    <h3>Ethical Sourcing</h3>
+                    <p>We maintain rigorous ethical sourcing protocols, supplier compliance audits, and fair labor standards across our supply chain. Anti-corruption and transparency are non-negotiable.</p>
+                </div>
+                <div class="card">
+                    <h5>Environmental</h5>
+                    <h3>Carbon Stewardship</h3>
+                    <p>Committed to net-zero emissions by 2035. Green logistics partnerships, circular economy initiatives, and emissions reduction targets across all operations.</p>
+                </div>
+                <div class="card">
+                    <h5>Community</h5>
+                    <h3>Social Impact</h3>
+                    <p>Supporting local employment, education and training programs, infrastructure development, and disaster relief in communities where we operate.</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 60px; text-align: center;">
+                <h3 style="color: var(--brand-blue); margin-bottom: 30px;">Certifications & Memberships</h3>
+                <p style="color: var(--platinum); max-width: 700px; margin: 0 auto;">ISO Certified • ESG Standards • UN Global Compact Alignment • Trade Association Member • Anti-Corruption Compliance</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===== INSIGHTS PAGE ===== -->
+    <div id="insights" class="page-section">
+        <section>
+            <div class="section-title">
+                <span>Knowledge</span>
+                <h2>Market Insights & News</h2>
+            </div>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 60px; color: var(--platinum);">Regular market commentary, company updates, and industry insights to keep you informed on trends shaping global commodities and trade.</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h5>Latest Update</h5>
+                    <h3>Global Energy Markets 2025</h3>
+                    <p>Emerging trends in energy trading, renewable integration, and supply chain resilience. Long-term demand projections and strategic positioning for trading partners.</p>
+                    <p style="color: var(--brand-blue); margin-top: 20px; font-size: 12px;">January 2025 • 5 min read</p>
+                </div>
+                <div class="card">
+                    <h5>Company News</h5>
+                    <h3>New Market Expansion</h3>
+                    <p>Joan International expands operations into Southeast Asia with new regional office and strategic partnerships with key producers and logistics operators.</p>
+                    <p style="color: var(--brand-blue); margin-top: 20px; font-size: 12px;">December 2024 • 3 min read</p>
+                </div>
+                <div class="card">
+                    <h5>Sustainability</h5>
+                    <h3>ESG Progress Report</h3>
+                    <p>2024 Sustainability Report: Carbon reduction achievements, community programs impact, and net-zero 2035 roadmap progress across global operations.</p>
+                    <p style="color: var(--brand-blue); margin-top: 20px; font-size: 12px;">November 2024 • 7 min read</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===== CAREERS PAGE ===== -->
+    <div id="careers" class="page-section">
+        <section>
+            <div class="section-title">
+                <span>Join Us</span>
+                <h2>Careers at Joan International</h2>
+            </div>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 60px; color: var(--platinum);">We're building a diverse, inclusive team of talented professionals committed to excellence in global commodities trading.</p>
+            
+            <div class="about-flex">
+                <div class="about-text">
+                    <h3>Why Work at Joan</h3>
+                    <div style="display: grid; gap: 15px; margin-top: 20px;">
+                        <div class="value-box"><strong>Inclusive Culture</strong><span>Diverse, welcoming workplace</span></div>
+                        <div class="value-box"><strong>Growth</strong><span>Professional development programs</span></div>
+                        <div class="value-box"><strong>Benefits</strong><span>Competitive compensation packages</span></div>
+                        <div class="value-box"><strong>Impact</strong><span>Work that matters globally</span></div>
+                        <div class="value-box"><strong>Global</strong><span>Expanding market opportunities</span></div>
+                        <div class="value-box"><strong>Collaboration</strong><span>Dynamic, talented teams</span></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h5>Open Positions</h5>
+                    <p><strong>Trading & Risk</strong></p>
+                    <p style="color: var(--platinum); font-size: 12px; margin-bottom: 15px;">Commodity Trader • Risk Analyst • Market Intelligence Specialist</p>
+                    
+                    <p><strong>Supply Chain</strong></p>
+                    <p style="color: var(--platinum); font-size: 12px; margin-bottom: 15px;">Logistics Manager • Customs Specialist • Supply Chain Coordinator</p>
+                    
+                    <p><strong>Finance & Admin</strong></p>
+                    <p style="color: var(--platinum); font-size: 12px; margin-bottom: 15px;">Finance Analyst • Trade Finance Specialist • Operations Coordinator</p>
+                    
+                    <p><strong>Business Development</strong></p>
+                    <p style="color: var(--platinum); font-size: 12px;">Account Manager • BD Specialist • Client Relations</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 60px; text-align: center;">
+                <a class="btn-action" onclick="navigateTo('contact')" style="cursor: pointer;">Apply Now</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===== CONTACT PAGE ===== -->
+    <div id="contact" class="page-section">
+        <section>
+            <div class="section-title">
+                <span>Get In Touch</span>
+                <h2>Contact Joan International</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-bottom: 60px;">
+                <div>
+                    <h3 style="color: var(--brand-blue); margin-bottom: 30px;">Global Offices</h3>
+                    <div style="display: grid; gap: 30px;">
+                        <div>
+                            <h4 style="color: var(--dubai-gold); margin-bottom: 8px;">Headquarters</h4>
+                            <p style="color: var(--platinum); font-size: 14px; margin: 0;">Dubai, United Arab Emirates<br>Email: info@joaninternational.com<br>Phone: +971 4 XXX XXXX</p>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--dubai-gold); margin-bottom: 8px;">Europe Office</h4>
+                            <p style="color: var(--platinum); font-size: 14px; margin: 0;">London, United Kingdom<br>Email: europe@joaninternational.com<br>Phone: +44 20 XXXX XXXX</p>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--dubai-gold); margin-bottom: 8px;">Asia Pacific</h4>
+                            <p style="color: var(--platinum); font-size: 14px; margin: 0;">Singapore<br>Email: asia@joaninternational.com<br>Phone: +65 XXXX XXXX</p>
+                        </div>
+                    </div>
+                    
+                    <h3 style="color: var(--brand-blue); margin-top: 40px; margin-bottom: 20px;">Department Contacts</h3>
+                    <p style="color: var(--platinum); font-size: 13px;">
+                        <strong>Sales & Trading:</strong> sales@joaninternational.com<br>
+                        <strong>Supply Chain:</strong> logistics@joaninternational.com<br>
+                        <strong>General:</strong> info@joaninternational.com<br>
+                        <strong>Careers:</strong> careers@joaninternational.com<br>
+                        <strong>Press:</strong> press@joaninternational.com
+                    </p>
+                </div>
+
+                <div class="inquiry-panel">
+                    <p style="color: var(--dubai-gold); text-transform: uppercase; letter-spacing: 4px; font-size: 11px; margin-bottom: 10px;">Private Consultation</p>
+                    <h2>Inquiry Suite</h2>
+                    <form id="inquiryForm">
+                        <div class="form-grid">
+                            <input type="text" name="full_name" placeholder="Full Name" required>
+                            <input type="email" name="email" placeholder="Corporate Email" required>
+                            <input type="text" name="company" placeholder="Company" required>
+                            <input type="text" name="project_type" placeholder="Nature of Project (e.g. Energy, Metals)" required>
+                            <textarea name="message" placeholder="Project Details (Optional)" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="btn-action">Begin Consultation</button>
+                        <div class="form-message success" id="successMessage">
+                            ✓ Thank you! Your inquiry has been submitted successfully. We'll be in touch shortly.
+                        </div>
+                        <div class="form-message error" id="errorMessage">
+                            ✗ Something went wrong. Please try again or contact us directly.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
 
     <footer>
-        ©️ JOAN INTERNATIONAL EXECUTIVE PORTAL | <a href="#" style="color: inherit; text-decoration: none;">PRIVACY POLICY</a>
+        ©️ JOAN INTERNATIONAL | <a href="#" style="color: inherit; text-decoration: none;" onclick="navigateTo('privacy')">PRIVACY POLICY</a> | <a href="#" style="color: inherit; text-decoration: none;" onclick="navigateTo('terms')">TERMS OF USE</a>
     </footer>
 
     <script>
-        // Form handling
+        // Navigation Router
+        function navigateTo(page) {
+            // Close all dropdowns
+            document.querySelectorAll('.dropdown-content').forEach(el => el.classList.remove('show'));
+            
+            // Hide all pages
+            document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
+            
+            // Show selected page
+            const pageEl = document.getElementById(page);
+            if (pageEl) {
+                pageEl.classList.add('active');
+                window.scrollTo(0, 0);
+            }
+        }
+
+        // Dropdown toggle
+        function toggleDropdown(id) {
+            const dropdown = document.getElementById(id);
+            dropdown.classList.toggle('show');
+            
+            // Close other dropdowns
+            document.querySelectorAll('.dropdown-content').forEach(el => {
+                if (el.id !== id) el.classList.remove('show');
+            });
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown-content').forEach(el => el.classList.remove('show'));
+            }
+        });
+
+        // // Form handling
         document.getElementById('inquiryForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -561,17 +1134,6 @@
             });
             
             return false;
-        });
-
-        // Smooth scroll for nav links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
         });
     </script>
 
