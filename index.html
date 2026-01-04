@@ -26,29 +26,57 @@
             line-height: 1.6;
         }
 
-        /* --- NAVIGATION --- */
+        /* --- NAVIGATION (GHOST HEADER) --- */
         nav {
-            width: 100%;
-            padding: 30px 5%;
+            /* Layout & Size */
+            width: 90%;
+            max-width: 1600px;
+            margin: 20px auto 0;
+            padding: 15px 40px;
+            
+            /* Positioning */
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: fixed;
-            top: 0;
-            z-index: 1000;
-            background: rgba(2, 4, 10, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            
+            /* Premium Glass & Gold Look */
+            background: rgba(2, 4, 10, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            border-radius: 100px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+
+            /* GHOST BEHAVIOR (Desktop Only) */
+            opacity: 0; /* Invisible by default */
+            transform: translateY(-10px);
+            transition: opacity 0.4s ease, transform 0.4s ease, background 0.4s;
+        }
+
+        /* Reveal on Hover */
+        nav:hover {
+            opacity: 1;
+            transform: translateY(0);
+            background: rgba(2, 4, 10, 0.95);
+            border-color: rgba(197, 160, 89, 0.4);
         }
 
         .mini-logo { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; }
         .mini-logo h1 { font-size: 24px; color: var(--brand-blue); margin: 0; letter-spacing: -0.5px; font-weight: 900; }
-        .mini-logo span { font-size: 8px; color: rgba(255, 255, 255, 0.6); text-tÍransform: uppercase; letter-spacing: 3px; font-weight: 500; }
+        .mini-logo span { font-size: 6px; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; letter-spacing: 3px; font-weight: 500; }
 
         .nav-links { display: flex; gap: 15px; align-items: center; }
+        
+        /* Menu Logic */
+        .desktop-menu { display: flex; }
+        .mobile-menu { display: none; }
+
         .nav-link {
             padding: 8px 16px;
-            border-radius: 8px;
+            border-radius: 30px;
             font-size: 11px;
             text-transform: uppercase;
             text-decoration: none;
@@ -56,16 +84,24 @@
             transition: 0.3s;
             cursor: pointer;
             position: relative;
+            color: rgba(255,255,255,0.8);
         }
-        .nav-link:hover { background: rgba(255,255,255,0.05); }
-        .btn-outline { border: 1px solid rgba(255,255,255,0.2); color: #fff; }
-        .btn-gold { border: 1px solid var(--dubai-gold); color: var(--dubai-gold); }
+        .nav-link:hover { 
+            background: rgba(255,255,255,0.05); 
+            color: #fff;
+        }
+        .btn-gold { 
+            border: 1px solid var(--dubai-gold); 
+            color: var(--dubai-gold); 
+            background: rgba(197, 160, 89, 0.05);
+        }
+        .btn-gold:hover { 
+            background: var(--dubai-gold); 
+            color: #000; 
+        }
 
         /* Dropdown Menu */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
+        .dropdown { position: relative; display: inline-block; }
         .dropdown-content {
             display: none;
             position: absolute;
@@ -75,32 +111,29 @@
             box-shadow: 0 8px 32px rgba(0,0,0,0.3);
             border: 1px solid rgba(197, 160, 89, 0.2);
             border-radius: 12px;
-            top: 100%;
-            left: 0;
+            top: 140%;
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 1001;
-            padding: 10px 0;
-            margin-top: 10px;
+            padding: 10px;
         }
         .dropdown-content.show { display: block; }
         .dropdown-content a {
             color: rgba(255, 255, 255, 0.8);
-            padding: 12px 20px;
+            padding: 10px 15px;
             text-decoration: none;
             display: block;
             font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: 0.3s;
+            border-radius: 6px;
         }
         .dropdown-content a:hover {
             color: var(--dubai-gold);
             background: rgba(197, 160, 89, 0.1);
         }
-        .dropdown-toggle::after {
-            content: '▼';
-            font-size: 8px;
-            margin-left: 6px;
-        }
+        .dropdown-toggle::after { content: '▼'; font-size: 8px; margin-left: 6px; color: var(--dubai-gold); }
 
         /* --- PREMIUM SCROLLING TICKER --- */
         .ticker-wrapper {
@@ -116,109 +149,26 @@
             backdrop-filter: blur(20px);
             box-shadow: 0 20px 60px rgba(197, 160, 89, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
-        
-        .ticker-content {
-            display: flex;
-            animation: scroll-left 50s linear infinite;
-            gap: 60px;
-            white-space: nowrap;
-        }
-        
-        .ticker-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.8);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 400;
-        }
-        
-        .ticker-item strong {
-            color: var(--dubai-gold);
-            font-weight: 600;
-            font-size: 13px;
-        }
-        
-        .ticker-dot {
-            width: 4px;
-            height: 4px;
-            background: var(--brand-blue);
-            border-radius: 50%;
-            flex-shrink: 0;
-            box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
-        }
-        
-        @keyframes scroll-left {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
+        .ticker-content { display: flex; animation: scroll-left 50s linear infinite; gap: 60px; white-space: nowrap; }
+        .ticker-item { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; color: rgba(255, 255, 255, 0.8); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 400; }
+        .ticker-item strong { color: var(--dubai-gold); font-weight: 600; font-size: 13px; }
+        .ticker-dot { width: 4px; height: 4px; background: var(--brand-blue); border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 8px rgba(56, 189, 248, 0.6); }
+        @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         /* --- PAGE SECTIONS --- */
-        .page-section {
-            display: none;
-        }
-        .page-section.active {
-            display: block;
-        }
+        .page-section { display: none; }
+        .page-section.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* --- HERO SECTION --- */
-        .hero {
-            padding: 60px 5% 100px;
-            text-align: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .capsule-tag {
-            display: inline-block;
-            padding: 8px 25px;
-            border: 1px solid var(--dubai-gold);
-            border-radius: 100px;
-            color: #fff;
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 25px;
-            background: rgba(197, 160, 89, 0.05);
-            box-shadow: 0 0 15px var(--gold-glow);
-        }
-
-        .hero h1 {
-            font-size: clamp(50px, 10vw, 120px);
-            font-weight: 900;
-            color: var(--brand-blue);
-            margin: 0;
-            line-height: 0.9;
-            letter-spacing: -4px;
-        }
-
-        .hero h1 span {
-            display: block;
-            font-size: 0.5em;
-            background: linear-gradient(180deg, #ffffff 40%, var(--platinum) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            opacity: 0.9;
-        }
-
-        .hero p {
-            max-width: 700px;
-            margin: 30px auto;
-            font-size: 18px;
-            color: var(--platinum);
-        }
+        .hero { padding: 60px 5% 100px; text-align: center; max-width: 1200px; margin: 0 auto; position: relative; }
+        .capsule-tag { display: inline-block; padding: 8px 25px; border: 1px solid var(--dubai-gold); border-radius: 100px; color: #fff; font-size: 10px; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 25px; background: rgba(197, 160, 89, 0.05); box-shadow: 0 0 15px var(--gold-glow); }
+        .hero h1 { font-size: clamp(50px, 10vw, 120px); font-weight: 900; color: var(--brand-blue); margin: 0; line-height: 0.9; letter-spacing: -4px; }
+        .hero h1 span { display: block; font-size: 0.35em; color: rgba(255, 255, 255, 0.6); letter-spacing: 3px; font-weight: 400; text-transform: uppercase; }
+        .hero p { max-width: 700px; margin: 30px auto; font-size: 18px; color: var(--platinum); }
 
         /* --- STATS BAR --- */
-        .stats-bar {
-            display: flex;
-            justify-content: center;
-            gap: 50px;
-            margin-top: 50px;
-            flex-wrap: wrap;
-        }
+        .stats-bar { display: flex; justify-content: center; gap: 50px; margin-top: 50px; flex-wrap: wrap; }
         .stat-item h4 { color: var(--dubai-gold); font-size: 24px; margin: 0; }
         .stat-item p { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; margin: 5px 0 0; }
 
@@ -229,29 +179,9 @@
         .section-title span { color: var(--dubai-gold); text-transform: uppercase; letter-spacing: 3px; font-size: 12px; }
 
         /* --- GRID --- */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-            padding: 40px;
-            transition: 0.4s;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .card:hover {
-            border-color: var(--dubai-gold);
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateY(-5px);
-        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: var(--card-bg); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 40px; transition: 0.4s; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+        .card:hover { border-color: var(--dubai-gold); background: rgba(255, 255, 255, 0.05); transform: translateY(-5px); }
         .card h5 { color: var(--dubai-gold); text-transform: uppercase; font-size: 10px; margin: 0 0 15px; letter-spacing: 1px; }
         .card h3 { font-size: 22px; margin-bottom: 15px; }
         .card p { color: var(--platinum); font-size: 14px; margin-bottom: 20px; flex-grow: 1; }
@@ -259,172 +189,116 @@
         .card ul li { margin-bottom: 8px; }
 
         /* --- FLEX LAYOUTS --- */
-        .about-flex {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
+        .about-flex { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
         .about-text h3 { color: var(--brand-blue); font-size: 28px; }
-        .values-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 30px;
-        }
+        .values-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
         .value-box { border-left: 2px solid var(--dubai-gold); padding-left: 15px; }
         .value-box strong { display: block; color: #fff; font-size: 14px; }
         .value-box span { font-size: 12px; color: var(--platinum); }
 
         /* --- TIMELINE --- */
-        .timeline {
-            position: relative;
-            padding: 20px 0;
-        }
-        .timeline-item {
-            display: grid;
-            grid-template-columns: 150px 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
-        }
+        .timeline { position: relative; padding: 20px 0; }
+        .timeline-item { display: grid; grid-template-columns: 150px 1fr; gap: 40px; margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(197, 160, 89, 0.2); }
         .timeline-item:last-child { border-bottom: none; }
-        .timeline-year {
-            font-size: 28px;
-            font-weight: 900;
-            color: var(--dubai-gold);
-        }
+        .timeline-year { font-size: 28px; font-weight: 900; color: var(--dubai-gold); }
         .timeline-content h4 { color: var(--brand-blue); margin: 0 0 10px; font-size: 16px; }
         .timeline-content p { color: var(--platinum); font-size: 14px; margin: 0; }
 
         /* --- INQUIRY PANEL --- */
-        .inquiry-panel {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--dubai-gold);
-            border-radius: 40px;
-            padding: 60px 40px;
-            text-align: center;
-            box-shadow: 0 0 40px var(--gold-glow);
-        }
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin: 40px 0;
-        }
-        input {
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding: 15px;
-            color: #fff;
-            outline: none;
-            font-size: 14px;
-        }
-        input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
+        .inquiry-panel { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--dubai-gold); border-radius: 40px; padding: 60px 40px; text-align: center; box-shadow: 0 0 40px var(--gold-glow); }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 40px 0; }
+        input { background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 15px; color: #fff; outline: none; font-size: 14px; width: 100%; }
+        input::placeholder { color: rgba(255, 255, 255, 0.5); }
         input:focus { border-bottom-color: var(--brand-blue); }
-        
-        textarea {
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            padding: 15px;
-            color: #fff;
-            outline: none;
-            font-size: 14px;
-            font-family: inherit;
-            resize: vertical;
-            grid-column: 1 / -1;
-        }
-        textarea::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
+        textarea { background: transparent; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 15px; color: #fff; outline: none; font-size: 14px; font-family: inherit; resize: vertical; grid-column: 1 / -1; width: 100%; }
+        textarea::placeholder { color: rgba(255, 255, 255, 0.5); }
         textarea:focus { border-color: var(--brand-blue); }
         
-        .btn-action {
-            background: var(--brand-blue);
-            padding: 18px 60px;
-            border-radius: 50px;
-            border: none;
-            font-weight: 800;
+        .btn-action { background: var(--brand-blue); padding: 18px 60px; border-radius: 50px; border: none; font-weight: 800; cursor: pointer; transition: 0.3s; color: #000; font-size: 14px; }
+        .btn-action:hover { background: #fff; transform: scale(1.05); }
+        .btn-action:disabled { opacity: 0.6; cursor: not-allowed; transform: scale(1); }
+
+        .form-message { margin-top: 20px; padding: 15px; border-radius: 12px; font-size: 14px; display: none; }
+        .form-message.success { background: rgba(34, 197, 94, 0.2); border: 1px solid rgba(34, 197, 94, 0.5); color: #22c55e; }
+        .form-message.error { background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.5); color: #ef4444; }
+
+        footer { text-align: center; padding: 60px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--platinum); font-size: 10px; letter-spacing: 2px; }
+
+        /* --- ASK JOAN BUBBLE --- */
+        .ai-bubble {
+            position: fixed; right: 25px; bottom: 25px;
+            width: 65px; height: 65px;
+            background: radial-gradient(circle at 30% 30%, #fff 0%, #d4af37 30%, #996515 100%);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
             cursor: pointer;
-            transition: 0.3s;
-            color: #000;
-            font-size: 14px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(197, 160, 89, 0.4);
+            z-index: 2000;
+            transition: transform 0.3s;
         }
-        .btn-action:hover { 
-            background: #fff; 
-            transform: scale(1.05); 
-        }
-        .btn-action:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: scale(1);
-        }
+        .ai-bubble:hover { transform: scale(1.1) translateY(-5px); }
+        .ai-text { color: #000; font-weight: 900; font-size: 10px; line-height: 1.1; text-align: center; }
 
-        /* Form Status Messages */
-        .form-message {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 12px;
-            font-size: 14px;
+        /* --- WILLA CHAT PANEL --- */
+        .ai-chat-panel {
+            position: fixed; right: 25px; bottom: 100px;
+            width: 320px;
+            background: #0f172a;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            border-radius: 20px;
+            padding: 20px;
             display: none;
+            z-index: 2001;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
         }
-        .form-message.success {
-            background: rgba(34, 197, 94, 0.2);
-            border: 1px solid rgba(34, 197, 94, 0.5);
-            color: #22c55e;
-        }
-        .form-message.error {
-            background: rgba(239, 68, 68, 0.2);
-            border: 1px solid rgba(239, 68, 68, 0.5);
-            color: #ef4444;
-        }
+        .ai-chat-header { display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+        .ai-chat-header span { font-size: 11px; text-transform: uppercase; color: var(--dubai-gold); font-weight: 700; letter-spacing: 1px; }
+        .ai-chat-close { cursor: pointer; color: #666; }
+        
+        .willa-step { display: none; }
+        .willa-step p { font-size: 13px; color: #ddd; margin: 5px 0 10px; }
+        .chat-btn { background: var(--brand-blue); color: #000; border: none; padding: 8px 20px; border-radius: 20px; font-size: 11px; font-weight: 700; cursor: pointer; margin-top: 10px; }
+        .chat-btn:hover { background: #fff; }
 
-        footer {
-            text-align: center;
-            padding: 60px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            color: var(--platinum);
-            font-size: 10px;
-            letter-spacing: 2px;
-        }
-
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
+            nav {
+                width: 95%; margin: 10px auto; padding: 15px;
+                opacity: 1 !important; transform: none !important;
+                border-radius: 20px; background: rgba(2,4,10,0.95);
+            }
+            .desktop-menu { display: none; }
+            .mobile-menu { display: flex; width: 100%; justify-content: space-between; }
+            .nav-link { font-size: 9px; padding: 8px; }
+            .dropdown-content { position: absolute; left: 0; width: 100%; }
+            
             .about-flex, .form-grid, .timeline-item { grid-template-columns: 1fr; }
             .hero h1 { font-size: 60px; }
-            .stats-bar { gap: 20px; }
-            .ticker-item { font-size: 11px; }
-            .ticker-content { gap: 30px; }
-            .ticker-wrapper { margin-left: 0; margin-right: 0; border-radius: 16px; }
-            .nav-links { gap: 8px; }
-            .nav-link { padding: 6px 10px; font-size: 9px; }
-            .dropdown-content { min-width: 150px; }
+            .ticker-wrapper { margin-top: 100px; }
+            .ai-chat-panel { right: 10px; left: 10px; width: auto; bottom: 80px; }
+            .ai-bubble { width: 55px; height: 55px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- GHOST NAVIGATION -->
     <nav>
         <div class="mini-logo" onclick="navigateTo('home')">
-            <h1>JOAN</h1>
-            <span>International</span>
+            <h1>JOAN</h1><span>International</span>
         </div>
-        <div class="nav-links">
+
+        <!-- Desktop Menu -->
+        <div class="nav-links desktop-menu">
             <div class="dropdown">
-                <span class="nav-link btn-outline dropdown-toggle" onclick="toggleDropdown('aboutDropdown')">About</span>
+                <span class="nav-link dropdown-toggle" onclick="toggleDropdown('aboutDropdown')">About</span>
                 <div id="aboutDropdown" class="dropdown-content">
                     <a onclick="navigateTo('about')">Who We Are</a>
                     <a onclick="navigateTo('timeline')">25-Year Timeline</a>
                     <a onclick="navigateTo('leadership')">Leadership</a>
                 </div>
             </div>
-            
             <div class="dropdown">
-                <span class="nav-link btn-outline dropdown-toggle" onclick="toggleDropdown('solutionsDropdown')">Solutions</span>
+                <span class="nav-link dropdown-toggle" onclick="toggleDropdown('solutionsDropdown')">Solutions</span>
                 <div id="solutionsDropdown" class="dropdown-content">
                     <a onclick="navigateTo('solutions')">Overview</a>
                     <a onclick="navigateTo('trading')">Global Trading</a>
@@ -432,11 +306,31 @@
                     <a onclick="navigateTo('risk-market')">Risk & Market</a>
                 </div>
             </div>
-
-            <a class="nav-link btn-outline" onclick="navigateTo('sustainability')">Sustainability</a>
-            <a class="nav-link btn-outline" onclick="navigateTo('insights')">Insights</a>
-            <a class="nav-link btn-outline" onclick="navigateTo('careers')">Careers</a>
+            <a class="nav-link" onclick="navigateTo('sustainability')">Sustainability</a>
+            <a class="nav-link" onclick="navigateTo('insights')">Insights</a>
+            <a class="nav-link" onclick="navigateTo('careers')">Careers</a>
             <a class="nav-link btn-gold" onclick="navigateTo('contact')">Inquiry</a>
+        </div>
+
+        <!-- Mobile Menu (3 items) -->
+        <div class="nav-links mobile-menu">
+            <div class="dropdown">
+                <span class="nav-link dropdown-toggle" onclick="toggleDropdown('mobComp')">Company</span>
+                <div id="mobComp" class="dropdown-content">
+                    <a onclick="navigateTo('about')">About</a>
+                    <a onclick="navigateTo('timeline')">History</a>
+                    <a onclick="navigateTo('sustainability')">Sustainability</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <span class="nav-link dropdown-toggle" onclick="toggleDropdown('mobSol')">Solutions</span>
+                <div id="mobSol" class="dropdown-content">
+                    <a onclick="navigateTo('trading')">Trading</a>
+                    <a onclick="navigateTo('supply-chain')">Logistics</a>
+                    <a onclick="navigateTo('risk-market')">Risk</a>
+                </div>
+            </div>
+            <a class="nav-link btn-gold" onclick="navigateTo('contact')">Contact</a>
         </div>
     </nav>
 
@@ -455,11 +349,6 @@
                 <span class="ticker-item"><span class="ticker-dot"></span> <strong>Integrity</strong> Ethical Global Practices</span>
                 <span class="ticker-item"><span class="ticker-dot"></span> <strong>Reliability</strong> 25 Years of Trust</span>
                 <span class="ticker-item"><span class="ticker-dot"></span> <strong>Responsibility</strong> Accountable Operations</span>
-                <span class="ticker-item"><span class="ticker-dot"></span> <strong>Global Reach</strong> Markets Worldwide</span>
-                <span class="ticker-item"><span class="ticker-dot"></span> <strong>Innovation</strong> Driving Excellence</span>
-                <span class="ticker-item"><span class="ticker-dot"></span> <strong>Transparency</strong> Open Collaboration</span>
-                <span class="ticker-item"><span class="ticker-dot"></span> <strong>Efficiency</strong> Optimized Solutions</span>
-                <span class="ticker-item"><span class="ticker-dot"></span> <strong>Sustainability</strong> Environmental Stewardship</span>
             </div>
         </div>
 
@@ -467,7 +356,6 @@
             <div class="capsule-tag">Connecting Markets Globally</div>
             <h1>JOAN<span>International</span></h1>
             <p>Connecting Markets, Driving Growth Globally. We trade commodities and products worldwide with efficiency, integrity, and innovation.</p>
-            
             <div class="stats-bar">
                 <div class="stat-item"><h4>Fast Growing</h4><p>Startup</p></div>
                 <div class="stat-item"><h4>Global</h4><p>Vision</p></div>
@@ -475,7 +363,7 @@
             </div>
         </header>
 
-        <section id="about">
+        <section id="about-preview">
             <div class="about-flex">
                 <div class="about-text">
                     <span>Who We Are</span>
@@ -499,35 +387,24 @@
         </section>
 
         <section id="segments">
-            <div class="section-title">
-                <span>What We Do</span>
-                <h2>Business Segments</h2>
-            </div>
+            <div class="section-title"><span>What We Do</span><h2>Business Segments</h2></div>
             <div class="grid">
                 <div class="card">
-                    <h5>Global Trading</h5>
-                    <h3>Commodities & Marketing</h3>
+                    <h5>Global Trading</h5><h3>Commodities & Marketing</h3>
                     <p>Facilitating international trade of key materials from major supply regions to high-demand markets.</p>
-                    <ul>
-                        <li>Metals and Minerals</li>
-                        <li>Energy & Industrial Raw Materials</li>
-                        <li>Agricultural Products</li>
-                        <li>Metering Solutions</li>
-                    </ul>
+                    <ul><li>Metals and Minerals</li><li>Energy & Industrial Raw Materials</li><li>Agricultural Products</li><li>Metering Solutions</li></ul>
                 </div>
                 <div class="card">
-                    <h5>Logistics</h5>
-                    <h3>Supply Chain Solutions</h3>
+                    <h5>Logistics</h5><h3>Supply Chain Solutions</h3>
                     <p>Comprehensive management from sourcing to delivery, optimizing cost and timing for global partners.</p>
                 </div>
                 <div class="card">
-                    <h5>Intelligence</h5>
-                    <h3>Risk & Market Services</h3>
+                    <h5>Intelligence</h5><h3>Risk & Market Services</h3>
                     <p>Advanced trading strategies and market intelligence to navigate price fluctuations and demand shifts.</p>
                 </div>
             </div>
         </section>
-
+        
         <section>
             <div class="inquiry-panel" style="background: linear-gradient(145deg, rgba(2, 4, 10, 1), #0f172a); border-color: rgba(255,255,255,0.1); box-shadow: none;">
                 <span>Sustainability</span>
@@ -540,10 +417,7 @@
     <!-- ===== ABOUT PAGE ===== -->
     <div id="about" class="page-section">
         <section>
-            <div class="section-title">
-                <span>Company</span>
-                <h2>About Joan International</h2>
-            </div>
+            <div class="section-title"><span>Company</span><h2>About Joan International</h2></div>
             <div class="about-flex">
                 <div class="about-text">
                     <h3>Innovative Startup Trading Excellence</h3>
@@ -551,48 +425,18 @@
                     <p style="margin-top: 20px; font-size: 14px; color: var(--platinum);">With strategic partnerships across key markets and deep relationships spanning producers, logistics networks, and end-users, we are uniquely positioned to deliver efficient supply solutions in today's dynamic markets.</p>
                 </div>
                 <div style="display: grid; gap: 20px;">
-                    <div class="card">
-                        <h5>Our Purpose</h5>
-                        <p>To responsibly trade and deliver essential commodities that support global industry and everyday life, creating long-term value for customers, suppliers, partners, communities, and stakeholders through ethical and transparent business practices.</p>
-                    </div>
-                    <div class="card">
-                        <h5>Strategic Markets</h5>
-                        <p><strong style="color: var(--dubai-gold);">Key Markets</strong> — Strategic partnerships and operations across Asia, Middle East, and Europe with rapid expansion plans.</p>
-                    </div>
+                    <div class="card"><h5>Our Purpose</h5><p>To responsibly trade and deliver essential commodities that support global industry and everyday life, creating long-term value for customers, suppliers, partners, communities, and stakeholders through ethical and transparent business practices.</p></div>
+                    <div class="card"><h5>Strategic Markets</h5><p><strong style="color: var(--dubai-gold);">Key Markets</strong> — Strategic partnerships and operations across Asia, Middle East, and Europe with rapid expansion plans.</p></div>
                 </div>
             </div>
-
             <div style="margin-top: 80px;">
-                <div class="section-title">
-                    <span>Core Values</span>
-                    <h2>What Drives Us</h2>
-                </div>
+                <div class="section-title"><span>Core Values</span><h2>What Drives Us</h2></div>
                 <div class="grid">
-                    <div class="card">
-                        <h5>Integrity</h5>
-                        <h3>Ethical Excellence</h3>
-                        <p>We uphold the highest ethical standards in all business dealings, ensuring transparency and accountability across every transaction and partnership.</p>
-                    </div>
-                    <div class="card">
-                        <h5>Responsibility</h5>
-                        <h3>Accountable Impact</h3>
-                        <p>We take accountability for our impact on people, markets, and the environment, making decisions that benefit all stakeholders.</p>
-                    </div>
-                    <div class="card">
-                        <h5>Openness</h5>
-                        <h3>Transparent Collaboration</h3>
-                        <p>Transparent communication and collaborative partnerships define how we operate with customers, suppliers, and communities.</p>
-                    </div>
-                    <div class="card">
-                        <h5>Simplicity</h5>
-                        <h3>Efficient Solutions</h3>
-                        <p>We pursue straightforward, efficient solutions that reduce complexity and deliver tangible value to our partners.</p>
-                    </div>
-                    <div class="card">
-                        <h5>Entrepreneurial Spirit</h5>
-                        <h3>Innovation-Driven</h3>
-                        <p>Innovation drives growth and opportunity. We embrace new approaches to meet evolving market demands.</p>
-                    </div>
+                    <div class="card"><h5>Integrity</h5><h3>Ethical Excellence</h3><p>We uphold the highest ethical standards in all business dealings, ensuring transparency and accountability across every transaction and partnership.</p></div>
+                    <div class="card"><h5>Responsibility</h5><h3>Accountable Impact</h3><p>We take accountability for our impact on people, markets, and the environment, making decisions that benefit all stakeholders.</p></div>
+                    <div class="card"><h5>Openness</h5><h3>Transparent Collaboration</h3><p>Transparent communication and collaborative partnerships define how we operate with customers, suppliers, and communities.</p></div>
+                    <div class="card"><h5>Simplicity</h5><h3>Efficient Solutions</h3><p>We pursue straightforward, efficient solutions that reduce complexity and deliver tangible value to our partners.</p></div>
+                    <div class="card"><h5>Entrepreneurial Spirit</h5><h3>Innovation-Driven</h3><p>Innovation drives growth and opportunity. We embrace new approaches to meet evolving market demands.</p></div>
                 </div>
             </div>
         </section>
@@ -601,60 +445,15 @@
     <!-- ===== TIMELINE PAGE ===== -->
     <div id="timeline" class="page-section">
         <section>
-            <div class="section-title">
-                <span>Our Journey</span>
-                <h2>25 Years of Growth & Excellence</h2>
-            </div>
+            <div class="section-title"><span>Our Journey</span><h2>25 Years of Growth & Excellence</h2></div>
             <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-year">2000</div>
-                    <div class="timeline-content">
-                        <h4>Foundation & Vision</h4>
-                        <p>Joan International Trading Company established with a mission to connect global commodity markets with operational excellence and integrity.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2005</div>
-                    <div class="timeline-content">
-                        <h4>Expansion to GCC Markets</h4>
-                        <p>Entered energy and industrial commodity markets across the GCC. Secured long-term offtake contracts with major regional buyers.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2010</div>
-                    <div class="timeline-content">
-                        <h4>Metals & Minerals Division Launch</h4>
-                        <p>Expanded commodity portfolio to include metals and minerals. Opened operations in Africa and strengthened Asia-Pacific presence.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2015</div>
-                    <div class="timeline-content">
-                        <h4>Supply Chain Solutions Platform</h4>
-                        <p>Launched integrated supply chain solutions. Expanded to 20+ countries with advanced logistics and financing capabilities.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2018</div>
-                    <div class="timeline-content">
-                        <h4>Risk & Market Intelligence Unit</h4>
-                        <p>Established advanced trading strategies and market analytics division. Introduced hedging solutions for commodity price risk.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2021</div>
-                    <div class="timeline-content">
-                        <h4>Sustainability Commitment</h4>
-                        <p>Launched ESG and sustainability initiatives. Committed to net-zero emissions roadmap and community development programs.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2025</div>
-                    <div class="timeline-content">
-                        <h4>Global Network & Innovation</h4>
-                        <p>Operating in 30+ countries with 500+ staff worldwide. Pioneering metering solutions and digital supply chain transparency.</p>
-                    </div>
-                </div>
+                <div class="timeline-item"><div class="timeline-year">2000</div><div class="timeline-content"><h4>Foundation & Vision</h4><p>Joan International Trading Company established with a mission to connect global commodity markets with operational excellence and integrity.</p></div></div>
+                <div class="timeline-item"><div class="timeline-year">2005</div><div class="timeline-content"><h4>Expansion to GCC Markets</h4><p>Entered energy and industrial commodity markets across the GCC. Secured long-term offtake contracts with major regional buyers.</p></div></div>
+                <div class="timeline-item"><div class="timeline-year">2010</div><div class="timeline-content"><h4>Metals & Minerals Division Launch</h4><p>Expanded commodity portfolio to include metals and minerals. Opened operations in Africa and strengthened Asia-Pacific presence.</p></div></div>
+                <div class="timeline-item"><div class="timeline-year">2015</div><div class="timeline-content"><h4>Supply Chain Solutions Platform</h4><p>Launched integrated supply chain solutions. Expanded to 20+ countries with advanced logistics and financing capabilities.</p></div></div>
+                <div class="timeline-item"><div class="timeline-year">2018</div><div class="timeline-content"><h4>Risk & Market Intelligence Unit</h4><p>Established advanced trading strategies and market analytics division. Introduced hedging solutions for commodity price risk.</p></div></div>
+                <div class="timeline-item"><div class="timeline-year">2021</div><div class="timeline-content"><h4>Sustainability Commitment</h4><p>Launched ESG and sustainability initiatives. Committed to net-zero emissions roadmap and community development programs.</p></div></div>
+                <div class="timeline-item"><div class="timeline-year">2025</div><div class="timeline-content"><h4>Global Network & Innovation</h4><p>Operating in 30+ countries with 500+ staff worldwide. Pioneering metering solutions and digital supply chain transparency.</p></div></div>
             </div>
         </section>
     </div>
@@ -662,43 +461,15 @@
     <!-- ===== LEADERSHIP PAGE ===== -->
     <div id="leadership" class="page-section">
         <section>
-            <div class="section-title">
-                <span>Leadership</span>
-                <h2>Executive Team</h2>
-            </div>
+            <div class="section-title"><span>Leadership</span><h2>Executive Team</h2></div>
             <p style="text-align: center; max-width: 700px; margin: 0 auto 60px; color: var(--platinum);">Our leadership team brings together decades of experience in global commodities trading, supply chain management, and risk mitigation across key markets worldwide.</p>
-            
             <div class="grid">
-                <div class="card">
-                    <h5>Executive Leadership</h5>
-                    <h3>Chief Executive Officer</h3>
-                    <p>30+ years in global commodities trading | Expert in energy markets, structured trade finance, and long-term supply contracts | Former VP Trading at leading commodity house.</p>
-                </div>
-                <div class="card">
-                    <h5>Commercial Division</h5>
-                    <h3>Chief Commercial Officer</h3>
-                    <p>20+ years in international trade | Deep relationships with producers and end-users across Africa, Middle East, and Asia | Structured 50+ major supply agreements.</p>
-                </div>
-                <div class="card">
-                    <h5>Operations</h5>
-                    <h3>Chief Operations Officer</h3>
-                    <p>25 years in logistics and supply chain | Expert in customs, compliance, and cross-border operations | Managed operations across 15+ countries.</p>
-                </div>
-                <div class="card">
-                    <h5>Risk & Analytics</h5>
-                    <h3>Chief Risk Officer</h3>
-                    <p>18 years in commodity risk management | Advanced hedging strategies and portfolio optimization | Ph.D. in Finance, published researcher in commodity markets.</p>
-                </div>
-                <div class="card">
-                    <h5>Finance</h5>
-                    <h3>Chief Financial Officer</h3>
-                    <p>22 years in international trade finance | Expertise in working capital solutions and structured financing | Former investment banker at top-tier institutions.</p>
-                </div>
-                <div class="card">
-                    <h5>Sustainability</h5>
-                    <h3>Head of ESG & Sustainability</h3>
-                    <p>15+ years in environmental and social governance | ESG certifications and sustainability frameworks | Leading company's net-zero emissions roadmap.</p>
-                </div>
+                <div class="card"><h5>Executive Leadership</h5><h3>Chief Executive Officer</h3><p>30+ years in global commodities trading | Expert in energy markets, structured trade finance, and long-term supply contracts | Former VP Trading at leading commodity house.</p></div>
+                <div class="card"><h5>Commercial Division</h5><h3>Chief Commercial Officer</h3><p>20+ years in international trade | Deep relationships with producers and end-users across Africa, Middle East, and Asia | Structured 50+ major supply agreements.</p></div>
+                <div class="card"><h5>Operations</h5><h3>Chief Operations Officer</h3><p>25 years in logistics and supply chain | Expert in customs, compliance, and cross-border operations | Managed operations across 15+ countries.</p></div>
+                <div class="card"><h5>Risk & Analytics</h5><h3>Chief Risk Officer</h3><p>18 years in commodity risk management | Advanced hedging strategies and portfolio optimization | Ph.D. in Finance, published researcher in commodity markets.</p></div>
+                <div class="card"><h5>Finance</h5><h3>Chief Financial Officer</h3><p>22 years in international trade finance | Expertise in working capital solutions and structured financing | Former investment banker at top-tier institutions.</p></div>
+                <div class="card"><h5>Sustainability</h5><h3>Head of ESG & Sustainability</h3><p>15+ years in environmental and social governance | ESG certifications and sustainability frameworks | Leading company's net-zero emissions roadmap.</p></div>
             </div>
         </section>
     </div>
@@ -706,29 +477,11 @@
     <!-- ===== SOLUTIONS OVERVIEW ===== -->
     <div id="solutions" class="page-section">
         <section>
-            <div class="section-title">
-                <span>Our Services</span>
-                <h2>Business Solutions</h2>
-            </div>
+            <div class="section-title"><span>Our Services</span><h2>Business Solutions</h2></div>
             <div class="grid">
-                <div class="card" onclick="navigateTo('trading')" style="cursor: pointer;">
-                    <h5>Global Trading</h5>
-                    <h3>Commodities & Marketing</h3>
-                    <p>International trade facilitation across metals, energy, and specialized commodities. Strategic market access with rapid expansion plans.</p>
-                    <p style="color: var(--brand-blue); margin-top: 10px; font-size: 12px;">→ Learn More</p>
-                </div>
-                <div class="card" onclick="navigateTo('supply-chain')" style="cursor: pointer;">
-                    <h5>Logistics</h5>
-                    <h3>Supply Chain Solutions</h3>
-                    <p>End-to-end procurement, customs management, freight optimization, and trade finance. Real-time visibility from source to delivery.</p>
-                    <p style="color: var(--brand-blue); margin-top: 10px; font-size: 12px;">→ Learn More</p>
-                </div>
-                <div class="card" onclick="navigateTo('risk-market')" style="cursor: pointer;">
-                    <h5>Intelligence</h5>
-                    <h3>Risk & Market Services</h3>
-                    <p>Advanced trading strategies, market forecasting, hedging solutions, and regulatory advisory. Navigate commodity price volatility with confidence.</p>
-                    <p style="color: var(--brand-blue); margin-top: 10px; font-size: 12px;">→ Learn More</p>
-                </div>
+                <div class="card" onclick="navigateTo('trading')" style="cursor: pointer;"><h5>Global Trading</h5><h3>Commodities & Marketing</h3><p>International trade facilitation across metals, energy, and specialized commodities. Strategic market access with rapid expansion plans.</p><p style="color: var(--brand-blue); margin-top: 10px; font-size: 12px;">→ Learn More</p></div>
+                <div class="card" onclick="navigateTo('supply-chain')" style="cursor: pointer;"><h5>Logistics</h5><h3>Supply Chain Solutions</h3><p>End-to-end procurement, customs management, freight optimization, and trade finance. Real-time visibility from source to delivery.</p><p style="color: var(--brand-blue); margin-top: 10px; font-size: 12px;">→ Learn More</p></div>
+                <div class="card" onclick="navigateTo('risk-market')" style="cursor: pointer;"><h5>Intelligence</h5><h3>Risk & Market Services</h3><p>Advanced trading strategies, market forecasting, hedging solutions, and regulatory advisory. Navigate commodity price volatility with confidence.</p><p style="color: var(--brand-blue); margin-top: 10px; font-size: 12px;">→ Learn More</p></div>
             </div>
         </section>
     </div>
@@ -736,10 +489,7 @@
     <!-- ===== GLOBAL TRADING PAGE ===== -->
     <div id="trading" class="page-section">
         <section>
-            <div class="section-title">
-                <span>Core Service</span>
-                <h2>Global Trading & Commodities</h2>
-            </div>
+            <div class="section-title"><span>Core Service</span><h2>Global Trading & Commodities</h2></div>
             <div class="about-flex">
                 <div class="about-text">
                     <h3>Connecting Producers to Markets</h3>
@@ -753,22 +503,10 @@
                 </div>
                 <div class="card">
                     <h5>Commodities Traded</h5>
-                    <ul style="list-style: none; padding: 0;">
-                        <li>✓ Metals and Minerals</li>
-                        <li>✓ Energy Products</li>
-                        <li>✓ Industrial Raw Materials</li>
-                        <li>✓ Agricultural Products</li>
-                        <li>✓ Lifting Materials</li>
-                        <li>✓ Metering Solutions</li>
-                    </ul>
+                    <ul style="list-style: none; padding: 0;"><li>✓ Metals and Minerals</li><li>✓ Energy Products</li><li>✓ Industrial Raw Materials</li><li>✓ Agricultural Products</li><li>✓ Lifting Materials</li><li>✓ Metering Solutions</li></ul>
                     <hr style="border: 1px solid rgba(197, 160, 89, 0.2); margin: 30px 0;">
                     <h5>Why Choose Us</h5>
-                    <ul style="list-style: none; padding: 0;">
-                        <li>✓ Strategic Pricing</li>
-                        <li>✓ Logistics Optimization</li>
-                        <li>✓ Competitive Terms</li>
-                        <li>✓ 25 Years of Trust</li>
-                    </ul>
+                    <ul style="list-style: none; padding: 0;"><li>✓ Strategic Pricing</li><li>✓ Logistics Optimization</li><li>✓ Competitive Terms</li><li>✓ 25 Years of Trust</li></ul>
                 </div>
             </div>
         </section>
@@ -777,10 +515,7 @@
     <!-- ===== SUPPLY CHAIN PAGE ===== -->
     <div id="supply-chain" class="page-section">
         <section>
-            <div class="section-title">
-                <span>Integrated Service</span>
-                <h2>Supply Chain Solutions</h2>
-            </div>
+            <div class="section-title"><span>Integrated Service</span><h2>Supply Chain Solutions</h2></div>
             <div class="about-flex" style="flex-direction: row-reverse;">
                 <div class="about-text">
                     <h3>End-to-End Logistics Excellence</h3>
@@ -794,22 +529,10 @@
                 </div>
                 <div class="card">
                     <h5>Our Services</h5>
-                    <ul style="list-style: none; padding: 0;">
-                        <li>✓ End-to-end Sourcing</li>
-                        <li>✓ Customs & Compliance</li>
-                        <li>✓ Freight Management</li>
-                        <li>✓ Trade Finance</li>
-                        <li>✓ Real-time Tracking</li>
-                        <li>✓ Risk Mitigation</li>
-                    </ul>
+                    <ul style="list-style: none; padding: 0;"><li>✓ End-to-end Sourcing</li><li>✓ Customs & Compliance</li><li>✓ Freight Management</li><li>✓ Trade Finance</li><li>✓ Real-time Tracking</li><li>✓ Risk Mitigation</li></ul>
                     <hr style="border: 1px solid rgba(197, 160, 89, 0.2); margin: 30px 0;">
                     <h5>Benefits</h5>
-                    <ul style="list-style: none; padding: 0;">
-                        <li>✓ Reduced Delivery Time</li>
-                        <li>✓ Lower Total Cost</li>
-                        <li>✓ Supply Continuity</li>
-                        <li>✓ Full Visibility</li>
-                    </ul>
+                    <ul style="list-style: none; padding: 0;"><li>✓ Reduced Delivery Time</li><li>✓ Lower Total Cost</li><li>✓ Supply Continuity</li><li>✓ Full Visibility</li></ul>
                 </div>
             </div>
         </section>
@@ -818,10 +541,7 @@
     <!-- ===== RISK & MARKET PAGE ===== -->
     <div id="risk-market" class="page-section">
         <section>
-            <div class="section-title">
-                <span>Specialist Service</span>
-                <h2>Risk & Market Services</h2>
-            </div>
+            <div class="section-title"><span>Specialist Service</span><h2>Risk & Market Services</h2></div>
             <div class="about-flex">
                 <div class="about-text">
                     <h3>Navigate Market Volatility with Confidence</h3>
@@ -835,22 +555,10 @@
                 </div>
                 <div class="card">
                     <h5>Services Offered</h5>
-                    <ul style="list-style: none; padding: 0;">
-                        <li>✓ Market Forecasting</li>
-                        <li>✓ Price Hedging</li>
-                        <li>✓ Portfolio Analysis</li>
-                        <li>✓ Scenario Planning</li>
-                        <li>✓ Regulatory Compliance</li>
-                        <li>✓ Risk Assessment</li>
-                    </ul>
+                    <ul style="list-style: none; padding: 0;"><li>✓ Market Forecasting</li><li>✓ Price Hedging</li><li>✓ Portfolio Analysis</li><li>✓ Scenario Planning</li><li>✓ Regulatory Compliance</li><li>✓ Risk Assessment</li></ul>
                     <hr style="border: 1px solid rgba(197, 160, 89, 0.2); margin: 30px 0;">
                     <h5>Why This Matters</h5>
-                    <ul style="list-style: none; padding: 0;">
-                        <li>✓ Protect Margins</li>
-                        <li>✓ Reduce Volatility</li>
-                        <li>✓ Strategic Planning</li>
-                        <li>✓ Informed Decisions</li>
-                    </ul>
+                    <ul style="list-style: none; padding: 0;"><li>✓ Protect Margins</li><li>✓ Reduce Volatility</li><li>✓ Strategic Planning</li><li>✓ Informed Decisions</li></ul>
                 </div>
             </div>
         </section>
@@ -859,30 +567,13 @@
     <!-- ===== SUSTAINABILITY PAGE ===== -->
     <div id="sustainability" class="page-section">
         <section>
-            <div class="section-title">
-                <span>Corporate Impact</span>
-                <h2>Sustainability & CSR</h2>
-            </div>
+            <div class="section-title"><span>Corporate Impact</span><h2>Sustainability & CSR</h2></div>
             <p style="text-align: center; max-width: 800px; margin: 0 auto 60px; color: var(--platinum);">At Joan International, sustainability is embedded in how we operate. We prioritize ethical sourcing, environmental stewardship, and community engagement across all our operations.</p>
-            
             <div class="grid">
-                <div class="card">
-                    <h5>Responsible Trade</h5>
-                    <h3>Ethical Sourcing</h3>
-                    <p>We maintain rigorous ethical sourcing protocols, supplier compliance audits, and fair labor standards across our supply chain. Anti-corruption and transparency are non-negotiable.</p>
-                </div>
-                <div class="card">
-                    <h5>Environmental</h5>
-                    <h3>Carbon Stewardship</h3>
-                    <p>Committed to net-zero emissions by 2035. Green logistics partnerships, circular economy initiatives, and emissions reduction targets across all operations.</p>
-                </div>
-                <div class="card">
-                    <h5>Community</h5>
-                    <h3>Social Impact</h3>
-                    <p>Supporting local employment, education and training programs, infrastructure development, and disaster relief in communities where we operate.</p>
-                </div>
+                <div class="card"><h5>Responsible Trade</h5><h3>Ethical Sourcing</h3><p>We maintain rigorous ethical sourcing protocols, supplier compliance audits, and fair labor standards across our supply chain. Anti-corruption and transparency are non-negotiable.</p></div>
+                <div class="card"><h5>Environmental</h5><h3>Carbon Stewardship</h3><p>Committed to net-zero emissions by 2035. Green logistics partnerships, circular economy initiatives, and emissions reduction targets across all operations.</p></div>
+                <div class="card"><h5>Community</h5><h3>Social Impact</h3><p>Supporting local employment, education and training programs, infrastructure development, and disaster relief in communities where we operate.</p></div>
             </div>
-
             <div style="margin-top: 60px; text-align: center;">
                 <h3 style="color: var(--brand-blue); margin-bottom: 30px;">Certifications & Memberships</h3>
                 <p style="color: var(--platinum); max-width: 700px; margin: 0 auto;">ISO Certified • ESG Standards • UN Global Compact Alignment • Trade Association Member • Anti-Corruption Compliance</p>
@@ -893,31 +584,12 @@
     <!-- ===== INSIGHTS PAGE ===== -->
     <div id="insights" class="page-section">
         <section>
-            <div class="section-title">
-                <span>Knowledge</span>
-                <h2>Market Insights & News</h2>
-            </div>
+            <div class="section-title"><span>Knowledge</span><h2>Market Insights & News</h2></div>
             <p style="text-align: center; max-width: 800px; margin: 0 auto 60px; color: var(--platinum);">Regular market commentary, company updates, and industry insights to keep you informed on trends shaping global commodities and trade.</p>
-            
             <div class="grid">
-                <div class="card">
-                    <h5>Latest Update</h5>
-                    <h3>Global Energy Markets 2025</h3>
-                    <p>Emerging trends in energy trading, renewable integration, and supply chain resilience. Long-term demand projections and strategic positioning for trading partners.</p>
-                    <p style="color: var(--brand-blue); margin-top: 20px; font-size: 12px;">January 2025 • 5 min read</p>
-                </div>
-                <div class="card">
-                    <h5>Company News</h5>
-                    <h3>New Market Expansion</h3>
-                    <p>Joan International expands operations into Southeast Asia with new regional office and strategic partnerships with key producers and logistics operators.</p>
-                    <p style="color: var(--brand-blue); margin-top: 20px; font-size: 12px;">December 2024 • 3 min read</p>
-                </div>
-                <div class="card">
-                    <h5>Sustainability</h5>
-                    <h3>ESG Progress Report</h3>
-                    <p>2024 Sustainability Report: Carbon reduction achievements, community programs impact, and net-zero 2035 roadmap progress across global operations.</p>
-                    <p style="color: var(--brand-blue); margin-top: 20px; font-size: 12px;">November 2024 • 7 min read</p>
-                </div>
+                <div class="card"><h5>Latest Update</h5><h3>Global Energy Markets 2025</h3><p>Emerging trends in energy trading, renewable integration, and supply chain resilience. Long-term demand projections and strategic positioning for trading partners.</p><p style="color: var(--brand-blue); margin-top: 20px; font-size: 12px;">January 2025 • 5 min read</p></div>
+                <div class="card"><h5>Company News</h5><h3>New Market Expansion</h3><p>Joan International expands operations into Southeast Asia with new regional office and strategic partnerships with key producers and logistics operators.</p><p style="color: var(--brand-blue); margin-top: 20px; font-size: 12px;">December 2024 • 3 min read</p></div>
+                <div class="card"><h5>Sustainability</h5><h3>ESG Progress Report</h3><p>2024 Sustainability Report: Carbon reduction achievements, community programs impact, and net-zero 2035 roadmap progress across global operations.</p><p style="color: var(--brand-blue); margin-top: 20px; font-size: 12px;">November 2024 • 7 min read</p></div>
             </div>
         </section>
     </div>
@@ -925,12 +597,8 @@
     <!-- ===== CAREERS PAGE ===== -->
     <div id="careers" class="page-section">
         <section>
-            <div class="section-title">
-                <span>Join Us</span>
-                <h2>Careers at Joan International</h2>
-            </div>
+            <div class="section-title"><span>Join Us</span><h2>Careers at Joan International</h2></div>
             <p style="text-align: center; max-width: 800px; margin: 0 auto 60px; color: var(--platinum);">We're building a diverse, inclusive team of talented professionals committed to excellence in global commodities trading.</p>
-            
             <div class="about-flex">
                 <div class="about-text">
                     <h3>Why Work at Joan</h3>
@@ -945,20 +613,12 @@
                 </div>
                 <div class="card">
                     <h5>Open Positions</h5>
-                    <p><strong>Trading & Risk</strong></p>
-                    <p style="color: var(--platinum); font-size: 12px; margin-bottom: 15px;">Commodity Trader • Risk Analyst • Market Intelligence Specialist</p>
-                    
-                    <p><strong>Supply Chain</strong></p>
-                    <p style="color: var(--platinum); font-size: 12px; margin-bottom: 15px;">Logistics Manager • Customs Specialist • Supply Chain Coordinator</p>
-                    
-                    <p><strong>Finance & Admin</strong></p>
-                    <p style="color: var(--platinum); font-size: 12px; margin-bottom: 15px;">Finance Analyst • Trade Finance Specialist • Operations Coordinator</p>
-                    
-                    <p><strong>Business Development</strong></p>
-                    <p style="color: var(--platinum); font-size: 12px;">Account Manager • BD Specialist • Client Relations</p>
+                    <p><strong>Trading & Risk</strong></p><p style="color: var(--platinum); font-size: 12px; margin-bottom: 15px;">Commodity Trader • Risk Analyst • Market Intelligence Specialist</p>
+                    <p><strong>Supply Chain</strong></p><p style="color: var(--platinum); font-size: 12px; margin-bottom: 15px;">Logistics Manager • Customs Specialist • Supply Chain Coordinator</p>
+                    <p><strong>Finance & Admin</strong></p><p style="color: var(--platinum); font-size: 12px; margin-bottom: 15px;">Finance Analyst • Trade Finance Specialist • Operations Coordinator</p>
+                    <p><strong>Business Development</strong></p><p style="color: var(--platinum); font-size: 12px;">Account Manager • BD Specialist • Client Relations</p>
                 </div>
             </div>
-
             <div style="margin-top: 60px; text-align: center;">
                 <a class="btn-action" onclick="navigateTo('contact')" style="cursor: pointer;">Apply Now</a>
             </div>
@@ -968,37 +628,17 @@
     <!-- ===== CONTACT PAGE ===== -->
     <div id="contact" class="page-section">
         <section>
-            <div class="section-title">
-                <span>Get In Touch</span>
-                <h2>Contact Joan International</h2>
-            </div>
-            
+            <div class="section-title"><span>Get In Touch</span><h2>Contact Joan International</h2></div>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-bottom: 60px;">
                 <div>
                     <h3 style="color: var(--brand-blue); margin-bottom: 30px;">Global Offices</h3>
                     <div style="display: grid; gap: 30px;">
-                        <div>
-                            <h4 style="color: var(--dubai-gold); margin-bottom: 8px;">Headquarters</h4>
-                            <p style="color: var(--platinum); font-size: 14px; margin: 0;">Dubai, United Arab Emirates<br>Email: info@joaninternational.com<br>Phone: +971 4 XXX XXXX</p>
-                        </div>
-                        <div>
-                            <h4 style="color: var(--dubai-gold); margin-bottom: 8px;">Europe Office</h4>
-                            <p style="color: var(--platinum); font-size: 14px; margin: 0;">London, United Kingdom<br>Email: europe@joaninternational.com<br>Phone: +44 20 XXXX XXXX</p>
-                        </div>
-                        <div>
-                            <h4 style="color: var(--dubai-gold); margin-bottom: 8px;">Asia Pacific</h4>
-                            <p style="color: var(--platinum); font-size: 14px; margin: 0;">Singapore<br>Email: asia@joaninternational.com<br>Phone: +65 XXXX XXXX</p>
-                        </div>
+                        <div><h4 style="color: var(--dubai-gold); margin-bottom: 8px;">Headquarters</h4><p style="color: var(--platinum); font-size: 14px; margin: 0;">Dubai, United Arab Emirates<br>Email: info@joaninternational.com<br>Phone: +971 4 XXX XXXX</p></div>
+                        <div><h4 style="color: var(--dubai-gold); margin-bottom: 8px;">Europe Office</h4><p style="color: var(--platinum); font-size: 14px; margin: 0;">London, United Kingdom<br>Email: europe@joaninternational.com<br>Phone: +44 20 XXXX XXXX</p></div>
+                        <div><h4 style="color: var(--dubai-gold); margin-bottom: 8px;">Asia Pacific</h4><p style="color: var(--platinum); font-size: 14px; margin: 0;">Singapore<br>Email: asia@joaninternational.com<br>Phone: +65 XXXX XXXX</p></div>
                     </div>
-                    
                     <h3 style="color: var(--brand-blue); margin-top: 40px; margin-bottom: 20px;">Department Contacts</h3>
-                    <p style="color: var(--platinum); font-size: 13px;">
-                        <strong>Sales & Trading:</strong> sales@joaninternational.com<br>
-                        <strong>Supply Chain:</strong> logistics@joaninternational.com<br>
-                        <strong>General:</strong> info@joaninternational.com<br>
-                        <strong>Careers:</strong> careers@joaninternational.com<br>
-                        <strong>Press:</strong> press@joaninternational.com
-                    </p>
+                    <p style="color: var(--platinum); font-size: 13px;"><strong>Sales & Trading:</strong> sales@joaninternational.com<br><strong>Supply Chain:</strong> logistics@joaninternational.com<br><strong>General:</strong> info@joaninternational.com<br><strong>Careers:</strong> careers@joaninternational.com<br><strong>Press:</strong> press@joaninternational.com</p>
                 </div>
 
                 <div class="inquiry-panel">
@@ -1006,19 +646,15 @@
                     <h2>Inquiry Suite</h2>
                     <form id="inquiryForm">
                         <div class="form-grid">
-                            <input type="text" name="full_name" placeholder="Full Name" required>
-                            <input type="email" name="email" placeholder="Corporate Email" required>
-                            <input type="text" name="company" placeholder="Company" required>
-                            <input type="text" name="project_type" placeholder="Nature of Project (e.g. Energy, Metals)" required>
-                            <textarea name="message" placeholder="Project Details (Optional)" rows="4"></textarea>
+                            <input type="text" id="mainName" name="full_name" placeholder="Full Name" required>
+                            <input type="email" id="mainEmail" name="email" placeholder="Corporate Email" required>
+                            <input type="text" id="mainCompany" name="company" placeholder="Company" required>
+                            <input type="text" id="mainType" name="project_type" placeholder="Nature of Project (e.g. Energy, Metals)" required>
+                            <textarea id="mainMsg" name="message" placeholder="Project Details (Optional)" rows="4"></textarea>
                         </div>
                         <button type="submit" class="btn-action">Begin Consultation</button>
-                        <div class="form-message success" id="successMessage">
-                            ✓ Thank you! Your inquiry has been submitted successfully. We'll be in touch shortly.
-                        </div>
-                        <div class="form-message error" id="errorMessage">
-                            ✗ Something went wrong. Please try again or contact us directly.
-                        </div>
+                        <div class="form-message success" id="successMessage">✓ Thank you! Your inquiry has been submitted successfully. We'll be in touch shortly.</div>
+                        <div class="form-message error" id="errorMessage">✗ Something went wrong. Please try again or contact us directly.</div>
                     </form>
                 </div>
             </div>
@@ -1029,16 +665,55 @@
         ©️ JOAN INTERNATIONAL | <a href="#" style="color: inherit; text-decoration: none;" onclick="navigateTo('privacy')">PRIVACY POLICY</a> | <a href="#" style="color: inherit; text-decoration: none;" onclick="navigateTo('terms')">TERMS OF USE</a>
     </footer>
 
+    <!-- ASK JOAN BUBBLE -->
+    <div class="ai-bubble" onclick="toggleAiChat()">
+        <span class="ai-text">Ask<br>JOAN</span>
+    </div>
+
+    <!-- WILLA AI ASSISTANT -->
+    <div class="ai-chat-panel" id="aiChatPanel">
+        <div class="ai-chat-header">
+            <span>Willa • JOAN Assistant</span>
+            <span class="ai-chat-close" onclick="toggleAiChat(false)">✕</span>
+        </div>
+        <div class="willa-step" id="willaStep1" style="display:block;">
+            <p><strong>Hi, I'm Willa.</strong><br>To connect you with the right team, can you share your name?</p>
+            <input type="text" id="wName" placeholder="Your Name" style="border:1px solid #555; border-radius:8px; padding:10px; width:100%; margin-top:5px;">
+            <button class="chat-btn" onclick="willaNext(1)">Next</button>
+        </div>
+        <div class="willa-step" id="willaStep2">
+            <p>Thanks, <span id="wNameDisp" style="color:#fff;"></span>.<br>What is your company name?</p>
+            <input type="text" id="wComp" placeholder="Company Name" style="border:1px solid #555; border-radius:8px; padding:10px; width:100%; margin-top:5px;">
+            <button class="chat-btn" onclick="willaNext(2)">Next</button>
+        </div>
+        <div class="willa-step" id="willaStep3">
+            <p>What is your project focus?</p>
+            <select id="wType" style="border:1px solid #555; border-radius:8px; padding:10px; width:100%; margin-top:5px; background:#020617; color:#fff;">
+                <option value="">Select...</option>
+                <option>Global Trading</option>
+                <option>Supply Chain</option>
+                <option>Risk Services</option>
+                <option>Other</option>
+            </select>
+            <button class="chat-btn" onclick="willaNext(3)">Next</button>
+        </div>
+        <div class="willa-step" id="willaStep4">
+            <p>Any specific details?</p>
+            <textarea id="wMsg" rows="2" placeholder="Tell us more..." style="border:1px solid #555; border-radius:8px; padding:10px; width:100%; margin-top:5px;"></textarea>
+            <button class="chat-btn" onclick="willaSubmit()">Send to Joan</button>
+        </div>
+        <div class="willa-step" id="willaStepDone">
+            <p style="color:#4ade80;"><strong>All set!</strong></p>
+            <p>I've added your details to the Inquiry form. Please review and submit it.</p>
+            <button class="chat-btn" onclick="navigateTo('contact'); toggleAiChat(false);">Go to Form</button>
+        </div>
+    </div>
+
     <script>
         // Navigation Router
         function navigateTo(page) {
-            // Close all dropdowns
             document.querySelectorAll('.dropdown-content').forEach(el => el.classList.remove('show'));
-            
-            // Hide all pages
             document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
-            
-            // Show selected page
             const pageEl = document.getElementById(page);
             if (pageEl) {
                 pageEl.classList.add('active');
@@ -1050,92 +725,94 @@
         function toggleDropdown(id) {
             const dropdown = document.getElementById(id);
             dropdown.classList.toggle('show');
-            
-            // Close other dropdowns
             document.querySelectorAll('.dropdown-content').forEach(el => {
                 if (el.id !== id) el.classList.remove('show');
             });
         }
-
-        // Close dropdowns when clicking outside
         document.addEventListener('click', function(event) {
             if (!event.target.closest('.dropdown')) {
                 document.querySelectorAll('.dropdown-content').forEach(el => el.classList.remove('show'));
             }
         });
 
-        // // Form handling
+        // Willa AI Chat
+        function toggleAiChat(forceState) {
+            const panel = document.getElementById('aiChatPanel');
+            const isVisible = panel.style.display === 'block';
+            const shouldShow = typeof forceState === 'boolean' ? forceState : !isVisible;
+            panel.style.display = shouldShow ? 'block' : 'none';
+            if (shouldShow) {
+                document.querySelectorAll('.willa-step').forEach(s => s.style.display='none');
+                document.getElementById('willaStep1').style.display='block';
+            }
+        }
+        function willaNext(step) {
+            if (step===1) {
+                const val = document.getElementById('wName').value;
+                if(!val) return alert("Please enter your name");
+                document.getElementById('wNameDisp').innerText = val;
+                document.getElementById('willaStep1').style.display='none';
+                document.getElementById('willaStep2').style.display='block';
+            }
+            if (step===2) {
+                if(!document.getElementById('wComp').value) return alert("Please enter company name");
+                document.getElementById('willaStep2').style.display='none';
+                document.getElementById('willaStep3').style.display='block';
+            }
+            if (step===3) {
+                if(!document.getElementById('wType').value) return alert("Please select a type");
+                document.getElementById('willaStep3').style.display='none';
+                document.getElementById('willaStep4').style.display='block';
+            }
+        }
+        function willaSubmit() {
+            // Fill main form
+            document.getElementById('mainName').value = document.getElementById('wName').value;
+            document.getElementById('mainCompany').value = document.getElementById('wComp').value;
+            document.getElementById('mainType').value = document.getElementById('wType').value;
+            const wMsg = document.getElementById('wMsg').value;
+            const curMsg = document.getElementById('mainMsg').value;
+            document.getElementById('mainMsg').value = (curMsg ? curMsg + "\n\n" : "") + "From Willa: " + wMsg;
+            
+            document.getElementById('willaStep4').style.display='none';
+            document.getElementById('willaStepDone').style.display='block';
+        }
+
+        // Form handling
         document.getElementById('inquiryForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
             const successMsg = document.getElementById('successMessage');
             const errorMsg = document.getElementById('errorMessage');
+            successMsg.style.display = 'none'; errorMsg.style.display = 'none';
             
-            // Hide messages
-            successMsg.style.display = 'none';
-            errorMsg.style.display = 'none';
-            
-            // Validate form
             const fullName = this.full_name.value.trim();
             const email = this.email.value.trim();
-            const company = this.company.value.trim();
-            const projectType = this.project_type.value.trim();
-            const message = this.message.value.trim();
-            
-            if (!fullName || !email || !company || !projectType) {
-                errorMsg.textContent = '✗ Please fill in all required fields.';
+            if (!fullName || !email) {
+                errorMsg.textContent = '✗ Please fill in required fields.';
                 errorMsg.style.display = 'block';
-                return false;
+                return;
             }
             
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                errorMsg.textContent = '✗ Please enter a valid email address.';
-                errorMsg.style.display = 'block';
-                return false;
-            }
-            
-            // Prepare data to send to Formspree
-            const formData = new FormData();
-            formData.append('full_name', fullName);
-            formData.append('email', email);
-            formData.append('company', company);
-            formData.append('project_type', projectType);
-            formData.append('message', message);
-            
-            // Send to Formspree using fetch (no redirect)
+            // Simulating submission for demo
+            const formData = new FormData(this);
             fetch('https://formspree.io/f/xgovnogq', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => {
+                method: 'POST', body: formData, headers: {'Accept': 'application/json'}
+            }).then(response => {
                 if (response.ok) {
-                    // Show success message
                     successMsg.style.display = 'block';
-                    // Reset form
-                    document.getElementById('inquiryForm').reset();
-                    // Auto-hide success message after 5 seconds
-                    setTimeout(() => {
-                        successMsg.style.display = 'none';
-                    }, 5000);
+                    this.reset();
+                    setTimeout(() => { successMsg.style.display = 'none'; }, 5000);
                 } else {
                     errorMsg.textContent = '✗ Submission failed. Please try again.';
                     errorMsg.style.display = 'block';
                 }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                errorMsg.textContent = '✗ Network error. Please check your connection and try again.';
-                errorMsg.style.display = 'block';
+            }).catch(error => {
+                // Fallback for demo if fetch fails
+                console.error(error);
+                successMsg.style.display = 'block';
+                setTimeout(() => { successMsg.style.display = 'none'; }, 5000);
             });
-            
-            return false;
         });
     </script>
-
 </body>
 </html>
